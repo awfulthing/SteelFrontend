@@ -775,8 +775,8 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Задайте нужную прозрачность */
-    z-index: 999; /* Установите высокий z-index, чтобы попап был поверх других элементов */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 .popup_visible {

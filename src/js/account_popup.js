@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const popup = document.querySelector('.popup_add_info_wrapper');
 
     popupButton.addEventListener('click', (event) => {
-        event.stopPropagation(); // Предотвращаем всплытие события click, чтобы попап не закрывался сразу же после открытия
+        event.stopPropagation();
 
         popup.classList.toggle('popup_show');
     });

@@ -40,7 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const headerContainer = document.getElementById('headerContainer');
     const xhr = new XMLHttpRequest();
 
-    xhr.open('GET', 'header.html', true);
+    xhr.open('GET', 'blocks/header.html', true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             headerContainer.innerHTML = xhr.responseText;
