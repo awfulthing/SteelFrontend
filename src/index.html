@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Exo+2:wght@100;200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="icons/favicon.ico" type="image/ico">
+
+    <title>Steel</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <ul class="menu">
+                    <a href="index.html" class="menu_logo"><img src="icons/logo.png" alt="logo" class="logo_img"></a>
+                    <li class="menu_item"><a href="schedule.html" class="menu_link">Расписание</a></li>
+                    <li class="menu_item"><a href="trainings.html" class="menu_link">Тренировки</a></li>
+                    <li class="menu_item xl-hidden"><a href="account.html" class="menu_link">Аккаунт</a></li>
+                    <li class="menu_item"><a href="contacts.html" class="menu_link">Контакты</a></li>
+                    <li class="menu_item"><a href="trainers.html" class="menu_link">Тренеры</a></li>
+                    <li class="menu_item xl-hidden"><a href="achievments.html" class="menu_link">Ачивки</a></li>
+                    <li class="menu_item xl-hidden"><a href="news.html" class="menu_link">Новости</a></li>
+                    <li class="menu_item">
+                        <a href="#index.html" class="header_icons" id="searchIcon"><img src="icons/glass.svg"
+                                alt="glass" class="header_icons_min"></a>
+                        <a href="account.html" class="header_icons"><img src="icons/account.svg" alt="account"
+                                class="header_icons_min"></a>
+                    </li>
+                </ul>
+                <div class="wrapper_for_nonvis_block">
+                    <div class="hamburger_menu">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="nonvisible_logo">
+                        <a href="index.html" class="logo"><img src="icons/logo.png" alt="logo" class="logo_img"></a>
+                    </div>
+                </div>
+                <form class="search_box" action="#">
+                    <input class="search_input" type="search" placeholder="Поиск">
+                </form>
+            </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 offset-md-5 col-xl-6 offset-xl-5 col-xxl-6 offset-xxl-6">
+                    <h1 class="banner_header">Добро пожаловать в Steel</h1>
+                    <h2 class="banner_subheader">Выберете тренера и запишитесь на свою первую тренировку</h2>
+                    <button onclick="document.location='registration.html'" class="banner_btn">Записаться</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="search">
+        <div class="container">
+            <form class="search_box_phone xl-hidden" action="#">
+                <input class="search_phone_input" type="search" placeholder="Поиск">
+                <img class="search_phone_image" src="icons/glass.svg" alt="Поиск">
+            </form>
+        </div>
+
+    </section>
+    <section class="trainings">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-lg-5 col-xxl-4">
+                    <div class="header_marker">
+                        <img src="icons/marker_train.png" class="marker">
+                        <span class="marker_text"> Тренировки </span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-1 offset-md-11 col-xl-1 offset-xl-11 button_cont">
+
+                    <button onclick="document.location='trainings.html'" class="all_btn">Все<img
+                            src="icons/back_arrow_subheader2.svg" class="btn_arrow"></button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="trainings_card_wrapper_mini xl-hidden_on_index">
+
+                <div class="trainings_card_text_wrapper">
+                    <div class="card_header">
+                        <img src="icons/yoga.svg" alt="yoga icon" class="mini_icon">
+                        <h2 class="card_name">Йога</h2>
+                    </div>
+                    <div class="card_descr">
+                        Йога – это отличный способ отвлечься от проблем и избавиться от ненужных мыслей. Она
+                        помогает познать себя как внешне, так и изнутри
+                    </div>
+                    <button onclick="document.location='trainings_yoga.html'" class="all_btn">Подробнее<img
+                            src="icons/back_arrow_subheader3.svg" class="btn_arrow"></button>
+                </div>
+
+                <img src="img/yoga.png" alt="yoga" class="trainings_card_mini_img">
+            </div>
+
+            <div class="trainings_card_wrapper_mini xl-hidden_on_index">
+
+                <div class="trainings_card_text_wrapper">
+                    <div class="card_header">
+                        <img src="icons/stretching.svg" alt="yoga icon" class="mini_icon">
+                        <h2 class="card_name">Растяжка</h2>
+                    </div>
+                    <div class="card_descr">
+                        Растяжка – подходящая практика для человека в любом возрасте, независимо от образа жизни
+                        и ежедневной активности.
+                    </div>
+                    <button onclick="document.location='trainings_yoga.html'" class="all_btn">Подробнее<img
+                            src="icons/back_arrow_subheader3.svg" class="btn_arrow"></button>
+                </div>
+
+                <img src="img/stretching.png" alt="yoga" class="trainings_card_mini_img">
+            </div>
+
+
+            <div class="trainings_card_wrapper md-hidden_on_index">
+                <div class="trainings_card ">
+                    <div class="card_header">
+                        <img src="icons/yoga.svg" alt="yoga icon" class="mini_icon">
+                        <h2 class="card_name">Йога</h2>
+                    </div>
+
+                    <div class="card_descr">
+                        Йога – это отличный способ отвлечься от проблем и избавиться от ненужных мыслей. Она
+                        помогает познать себя как внешне, так и изнутри
+                    </div>
+
+                    <button onclick="document.location='trainings_yoga.html'" class="all_btn">Подробнее<img
+                            src="icons/back_arrow_subheader3.svg" class="btn_arrow"></button>
+
+                </div>
+
+                <img src="img/yoga.png" alt="yoga" class="trainings_card_imgs">
+
+                <div class="trainings_card within_m">
+                    <div class="card_header">
+                        <img src="icons/stretching.svg" alt="stretching icon" class="mini_icon">
+                        <h2 class="card_name">Растяжка</h2>
+                    </div>
+
+                    <div class="card_descr">
+                        Растяжка – подходящая практика для человека в любом возрасте, независимо от образа жизни
+                        и
+                        ежедневной активности.
+                    </div>
+
+                    <button class="all_btn">Подробнее<img src="icons/back_arrow_subheader3.svg"
+                            class="btn_arrow"></button>
+                </div>
+
+                <img src="img/stretching.png" alt="yoga" class="trainings_card_imgs">
+            </div>
+
+            <div class="trainings_card_wrapper sec_col md-hidden_on_index">
+                <img src="img/fitness_mini.png" alt="yoga" class="trainings_card_imgs">
+
+                <div class="trainings_card">
+                    <div class="card_header">
+                        <img src="icons/fitness.svg" alt="fitnes icon" class="mini_icon">
+                        <h2 class="card_name">Фитнес</h2>
+                    </div>
+
+                    <div class="card_descr">
+                        Фитнес - это оздоровительная методика, направленная на поддержание физической формы.
+                    </div>
+
+                    <button class="all_btn">Подробнее<img src="icons/back_arrow_subheader3.svg"
+                            class="btn_arrow"></button>
+                </div>
+
+                <img src="img/pilates.png" alt="yoga" class="trainings_card_imgs">
+
+                <div class="trainings_card">
+                    <div class="card_header">
+                        <img src="icons/pilates.svg" alt="yoga icon" class="mini_icon">
+                        <h2 class="card_name">Пилатес</h2>
+                    </div>
+
+                    <div class="card_descr">
+                        Пилатес уменьшает мышечное
+                        напряжение, улучшает эластичность мышц и подвижность суставов и
+                        служит отличной профилактикой хрупкости костей.
+                    </div>
+
+                    <button class="all_btn">Подробнее<img src="icons/back_arrow_subheader3.svg"
+                            class="btn_arrow"></button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="adventages">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-7 col-xl-6 col-xxl-5">
+                    <div class="header_marker">
+                        <img src="icons/marker_train.png" alt="marker" class="marker">
+                        <span class="marker_text"> Немного о Steel </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 offset-md-0 no_padd">
+                    <div class="advent_card">
+                        <img src="icons/dumbbel2.svg" alt="dumbbel" class="advent_card_img">
+                        <h2 class="advent_card_descr">Тренажерный зал площадью 550 м2</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-4 offset-md-0">
+                    <div class="advent_card">
+                        <img src="icons/medal.svg" alt="medal" class="advent_card_img">
+                        <h2 class="advent_card_descr">Профессиональный тренерский состав</h2>
+                    </div>
+                </div>
+
+                <div class="col-md-4 offset-md-0">
+                    <div class="advent_card last">
+                        <img src="icons/adv_fitnes.svg" alt="fitnes" class="advent_card_img">
+                        <h2 class="advent_card_descr">Большая кардиозона с панорамным видом</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="second_banner super_smal_hidden">
+        <div class="container">
+            <h2 class="banner_header">Выберите тренера и запишитесь<br>
+                на первую пробную<br>
+                тренировку</h2>
+            <h2 class="banner_subheader">Выберите тренера и запишитесь на первую<br> пробную тренировку</h2>
+
+            <button onclick="document.location='schedule.html'" class="banner_btn">Записаться</button>
+        </div>
+    </section>
+
+    <section class="trainers">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-xxl-3 ">
+                    <div class="header_marker">
+                        <img src="icons/marker_train.png" class="marker">
+                        <span class="marker_text"> Тренеры </span>
+                    </div>
+                </div>
+
+                <div
+                    class="col-md-4 offset-md-8 col-lg-3 offset-lg-9 col-xl-3 offset-xl-9 col-xxl-2 offset-xxl-10 button_cont">
+                    <button onclick="document.location='trainers.html'" class="all_btn">Смотреть всех<img
+                            src="icons/back_arrow_subheader2.svg" class="btn_arrow"></button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 col-lg-3  col-md-4">
+                    <a href="trainer_ulia_page.html">
+                        <div class="trainers_card">
+                            <div class="first_circle">
+                                <div class="second_circle">
+                                    <img src="img/triner_ulia.png" class="circle_img">
+                                </div>
+                            </div>
+                            <h2 class="trainer_name">Юлия Антипова</h2>
+                            <h3 class="trainer_subtitle">Растяжка</h3>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-lg-3  col-md-4">
+                    <div class="trainers_card">
+                        <div class="first_circle">
+                            <div class="second_circle">
+                                <img src="img/trainer_artiom.png" class="circle_img">
+                            </div>
+                        </div>
+                        <h2 class="trainer_name">Артём Макаров</h2>
+                        <h3 class="trainer_subtitle">Йога</h3>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3  col-md-4">
+                    <div class="trainers_card">
+                        <div class="first_circle">
+                            <div class="second_circle">
+                                <img src="img/trainer_elena.png" class="circle_img">
+                            </div>
+
+                        </div>
+                        <h2 class="trainer_name">Елена Полякова</h2>
+                        <h3 class="trainer_subtitle">Фитнес</h3>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 md-hidden_trainer_card">
+                    <div class="trainers_card">
+                        <div class="first_circle">
+                            <div class="second_circle">
+                                <img src="img/trainer_denis.png" class="circle_img">
+                            </div>
+
+                        </div>
+                        <h2 class="trainer_name">Денис Высоцкий</h2>
+                        <h3 class="trainer_subtitle">Йога</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <section class="news">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-7 col-xl-6">
+                    <div class="header_marker">
+                        <img src="icons/marker_train.png" class="marker">
+                        <span class="marker_text"> Новости и акции </span>
+                    </div>
+                </div>
+
+                <div class="col-md-2 offset-md-10 button_cont">
+                    <button onclick="document.location='news.html'" class="all_btn">Подробнее<img
+                            src="icons/back_arrow_subheader2.svg" class="btn_arrow"></button>
+                </div>
+                <div class="col-6 col-md-4">
+                    <div class="news_card_wrapper">
+                        <div class="news_card_content">
+                            <div class="news_card_img_wrapper">
+                                <img src="img/news1.png" alt="girls on stretching" class="news_card_img">
+                            </div>
+                            <div class="news_card_text_wrapper">
+                                <h2 class="news_card_header">До 31.01.23</h2>
+                                <h3 class="news_card_subheader">Тренировки с персональным тренером от 3600 руб в мес
+                                </h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <div class="news_card_wrapper">
+                        <div class="news_card_content">
+                            <div class="news_card_img_wrapper">
+                                <img src="img/news2.png" alt="girls on stretching" class="news_card_img">
+                            </div>
+                            <div class="news_card_text_wrapper">
+                                <h2 class="news_card_header">До 31.01.23</h2>
+                                <h3 class="news_card_subheader">Испытай возможности клуба и получи специальные условия
+                                    на
+                                    покупку</h3>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4">
+                    <a href="news_page.html">
+                        <div class="news_card_wrapper last">
+                            <div class="news_card_content">
+                                <div class="news_card_img_wrapper">
+                                    <img src="img/news3.png" alt="gym" class="news_card_img">
+                                </div>
+                                <div class="news_card_text_wrapper">
+                                    <h2 class="news_card_header">До 31.01.23</h2>
+                                    <h3 class="news_card_subheader">Заканчивается карта? Продли свой абонемент на
+                                        выходных
+                                        условиях</h3>
+                                </div>
+
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer_wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 col-md-4 col-lg-3 ">
+                        <div class="text_block">
+                            <h2 class="footer_header">Контакты</h2>
+                            <div class="elems_cont">
+                                <h3 class="footer_elems">г. Новосибирск, Красный проспект 274</h3>
+                                <h3 class="footer_elems">steelstudio@gmail.com</h3>
+                                <h3 class="footer_elems">+7 (800) 555-35-35</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4 col-lg-3 ">
+                        <div class="text_block second">
+                            <h2 class="footer_header">Время работы</h2>
+                            <div class="elems_cont">
+                                <h3 class="footer_elems">Пн - Пт с 10:00 до 21:00</h3>
+                                <h3 class="footer_elems">Сб - Вс с 10:00 до 19:00</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3 sm-hidden">
+                        <div class="text_block second">
+                            <h2 class="footer_header">Наши соц. сети</h2>
+                            <div class="footer_social_item">
+                                <a href="#">
+                                    <img src="icons/vk.svg" alt="vk_logo" class="socialmedia_icon"></a>
+                                <a href="#">
+                                    <img src="icons/inst.svg" alt="instagram_logo" class="socialmedia_icon"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/new_script.js"></script>
+    <script src="js/search.js"></script>
+</body>
+
+</html>
