@@ -118,7 +118,9 @@ nav {
     background-color: transparent;
     width: 63%;
 }
-
+.search_box_active {
+    display: block;
+}
 .search_input {
     width: 100%;
     padding: 10px;
@@ -134,6 +136,7 @@ nav {
     border: 2px solid #91da04;
     outline: none;
 }
+
 .banner {
     height: 600px;
     min-width: 100%;

@@ -1,7 +1,10 @@
 window.addEventListener('DOMContentLoaded', () => {
     const menu = document.querySelector('.menu'),
         menuItem = document.querySelectorAll('.menu_item'),
-        hamburger = document.querySelector('.hamburger_menu');
+        hamburger = document.querySelector('.hamburger_menu'),
+        searchIcon = document.querySelector('.searchIcon'),
+        searchBox = document.querySelector('.search_box'),
+        searchInput = document.querySelector('.search_input');
 
     const closeMenu = () => {
         menu.classList.remove('menu_active');
@@ -17,6 +20,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     hamburger.addEventListener('click', () => {
         menu.classList.toggle('menu_active');
+    });
+
+    searchIcon.addEventListener('click', () => {
+        searchBox.classList.toggle('search_box_active');
+        searchInput.focus(); // Добавьте эту строку
     });
 
     menuItem.forEach(item => {

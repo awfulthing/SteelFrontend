@@ -35,8 +35,8 @@
                     <li class="menu_item xl-hidden"><a href="achievments.html" class="menu_link">Ачивки</a></li>
                     <li class="menu_item xl-hidden"><a href="news.html" class="menu_link">Новости</a></li>
                     <li class="menu_item">
-                        <a href="#index.html" class="header_icons" id="searchIcon"><img src="icons/glass.svg"
-                                alt="glass" class="header_icons_min"></a>
+                        <a class="header_icons searchIcon"><img src="icons/glass.svg" alt="glass"
+                                class="header_icons_min"></a>
                         <a href="account.html" class="header_icons"><img src="icons/account.svg" alt="account"
                                 class="header_icons_min"></a>
                     </li>
@@ -51,9 +51,10 @@
                         <a href="index.html" class="logo"><img src="icons/logo.png" alt="logo" class="logo_img"></a>
                     </div>
                 </div>
-                <div id="searchBox" class="search_box">
-                    <input type="text" placeholder="Поиск" class="search_input">
-                </div>
+                <form class="search_box" action="#">
+                    <input class="search_input" type="search" placeholder="Поиск">
+                </form>
+            </div>
             </div>
         </nav>
     </header>
@@ -208,7 +209,8 @@
             </div>
         </div>
     </footer>
-    <script src="js/new_script.js"></script>
+    <script src="js/burger_menu.js"></script>
+    <script src="js/search.js"></script>
 </body>
 
 </html>
