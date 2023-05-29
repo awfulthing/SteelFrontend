@@ -2829,6 +2829,37 @@ a {
           transform: scale(-1, 1);
 }
 
+.session_title {
+  font-family: "Comfortaa";
+  font-weight: 400;
+  font-size: 54px;
+}
+
+.date_of_session {
+  font-family: "Exo 2";
+  font-weight: 300;
+  font-size: 32px;
+}
+
+.present_list {
+  font-family: "Exo 2";
+  font-weight: 300;
+  font-size: 24px;
+}
+
+.present_list input[type=checkbox] {
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.trainer_session_section .banner_btn {
+  margin-top: 60px;
+  width: 300px;
+  height: 60px;
+  font-size: 24px;
+}
+
 .hidden_on_laptop {
   display: none;
 }
