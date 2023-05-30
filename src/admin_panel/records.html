@@ -43,10 +43,10 @@
             </div>
             <div class="row">
                 <div class="col-md-1 mt-5">
-                    <button class="btn btn-success" id="submit" onclick="AddData()">Добавить</button>
+                    <button class="btn btn-success" id="submit">Добавить</button>
                 </div>
                 <div class="col-md-1 mt-5">
-                    <button class="btn btn-primary" id="update" onclick="AddData()">Обновить</button>
+                    <button class="btn btn-primary" id="update">Обновить</button>
                 </div>
             </div>
         </div>
@@ -62,10 +62,11 @@
                             <th>Действия</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody id="tableContext"></tbody>
                 </table>
             </div>
         </div>
+        <script src="js/records.js"></script>
 </body>
 
 </html>

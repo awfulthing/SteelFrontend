@@ -33,16 +33,16 @@
                     <input type="number" name="ID" class="form-control" id="ID" value="1" readonly>
                 </div>
                 <div class="form-group col-md-6 mt-3 mb-3">
-                    <label for="nameOfDirection">Назание</label>
-                    <input type="text" name="nameOfDirection" class="form-control" id="nameOfDirection">
+                    <label for="nameOfRole">Назание</label>
+                    <input type="text" name="nameOfRole" class="form-control" id="nameOfRole">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-1 mt-5">
-                    <button class="btn btn-success" id="submit" onclick="AddData()">Добавить</button>
+                    <button class="btn btn-success" id="submit">Добавить</button>
                 </div>
                 <div class="col-md-1 mt-5">
-                    <button class="btn btn-primary" id="update" onclick="AddData()">Обновить</button>
+                    <button class="btn btn-primary" id="update">Обновить</button>
                 </div>
             </div>
         </div>
@@ -57,10 +57,11 @@
                             <th>Действия</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody id="tableContext"></tbody>
                 </table>
             </div>
         </div>
+        <script src="js/roles.js"></script>
 </body>
 
 </html>
