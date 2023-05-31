@@ -28,7 +28,7 @@ articles.forEach(article => AddarticleToTable(article));
 
 
 function AddarticleToTable(article) {
-    articles.push(article);
+    if (!articles.some(art => art.id === article.id)) articles.push(article);
 
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowarticle${article.id}">
@@ -75,7 +75,7 @@ async function Getarticles() {
         const response = await fetch(`https://localhost:7286/api/articles`);
 
         if (response.ok === true) {
-            articles = await response.json();
+            return await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);

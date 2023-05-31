@@ -229,14 +229,14 @@ nav {
 .button_cont {
     display: flex;
     justify-content: flex-end;
+    margin-bottom: 20px;
 }
 .trainings_card_wrapper {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
-    margin-top: 20px;
 }
-.trainings_card {
-    width: 333px;
+.trainings_card_text_content {
+    width: 328px;
     height: 342px;
     background: #ffffff;
     box-shadow: inset -4px 0px 15px -2px rgba(0, 0, 0, 0.06);
@@ -253,7 +253,7 @@ nav {
 .trainings_card_imgs {
     object-fit: cover;
     padding: 0;
-    width: 333px;
+    width: 329px;
     height: 342px;
 }
 .card_header {
@@ -276,7 +276,7 @@ nav {
     color: $subtitle;
     width: 294px;
 }
-.trainings_card .all_btn {
+.trainings_card_text_content .all_btn {
     margin-top: 32px;
     font-size: 14px;
     line-height: 17px;
@@ -406,6 +406,10 @@ nav {
     font-size: 20px;
     line-height: 24px;
     color: $subtitle;
+}
+.news_section_on_index {
+    display: flex;
+    flex-direction: row;
 }
 .news {
     margin-top: 100px;
@@ -1589,10 +1593,10 @@ a {
 .yoga_banner {
     height: 505px;
     width: 100%;
-    background: url("../img/yoga_banner.png") center center/cover no-repeat;
+    object-fit: cover;
 }
 .page_info {
-    height: 1800px;
+    height: 1290px;
 }
 .main_block {
     position: absolute;
@@ -2265,4 +2269,5 @@ a {
 .xl-hidden {
     display: none;
 }
+@import "_links.scss";
 @import "_media.scss";

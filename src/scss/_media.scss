@@ -10,25 +10,26 @@
             margin-top: 70px;
         }
     }
+    .trainings_card_text_content {
+        width: 285px;
+        height: 300px;
+        font-size: 15px;
+    }
     .trainings {
         .trainings_card_wrapper {
             height: 300px;
         }
 
         .trainings_card {
-            width: 285px;
+            width: 282px;
             height: 300px;
-            .card_descr {
-                width: 237px;
-                margin-top: 14px;
-                font-size: 15px;
-            }
+
             .all_btn {
                 margin-top: 40px;
             }
         }
         .trainings_card_imgs {
-            width: 285px;
+            width: 282px;
             height: 300px;
         }
     }

@@ -26,7 +26,7 @@ trainers.forEach(trainer => AddTrainerToTable(trainer));
 
 
 function AddTrainerToTable(trainer) {
-    trainers.push(trainer);
+    if (!trainers.some(tra => tra.id === trainer.id)) trainers.push(trainer);
 
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowtrainer${trainer.id}">
@@ -70,7 +70,7 @@ async function GetTrainers() {
         const response = await fetch(`https://localhost:7286/api/trainers`);
 
         if (response.ok === true) {
-            trainers = await response.json();
+            return await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);

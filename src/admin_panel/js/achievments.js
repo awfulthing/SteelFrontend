@@ -26,7 +26,7 @@ achievments.forEach(achievment => AddachievmentToTable(achievment));
 
 
 function AddachievmentToTable(achievment) {
-    achievments.push(achievment);
+    if (!achievments.some(ach => ach.id === achievment.id)) achievments.push(achievment);
 
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowachievment${achievment.id}">
@@ -70,7 +70,7 @@ async function Getachievments() {
         const response = await fetch(`https://localhost:7286/api/achievments`);
 
         if (response.ok === true) {
-            achievments = await response.json();
+            return await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);

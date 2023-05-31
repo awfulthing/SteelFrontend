@@ -24,7 +24,7 @@ whosAchiewments.forEach(whosAchiewment => AddwhosAchiewmentToTable(whosAchiewmen
 
 
 function AddwhosAchiewmentToTable(whosAchiewment) {
-    whosAchiewments.push(whosAchiewment);
+    if (!whosAchiewments.some(who => who.id === whosAchiewment.id)) whosAchiewments.push(whosAchiewment);
 
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowwhosAchiewment${whosAchiewment.id}">
@@ -65,7 +65,7 @@ async function GetwhosAchiewments() {
         const response = await fetch(`https://localhost:7286/api/whosAchiewments`);
 
         if (response.ok === true) {
-            whosAchiewments = await response.json();
+            return await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);

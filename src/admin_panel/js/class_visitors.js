@@ -24,7 +24,7 @@ visits.forEach(visit => AddvisitToTable(visit));
 
 
 function AddvisitToTable(visit) {
-    visits.push(visit);
+    if (!visits.some(v => v.id === visit.id)) visits.push(visit);
 
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowvisit${visit.id}">
@@ -65,7 +65,7 @@ async function Getvisits() {
         const response = await fetch(`https://localhost:7286/api/visits`);
 
         if (response.ok === true) {
-            visits = await response.json();
+            return await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);

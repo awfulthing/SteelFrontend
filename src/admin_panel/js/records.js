@@ -24,7 +24,7 @@ records.forEach(record => AddrecordToTable(record));
 
 
 function AddrecordToTable(record) {
-    records.push(record);
+    if (!records.some(rec => rec.id === record.id)) records.push(record);
 
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowrecord${record.id}">
@@ -65,7 +65,7 @@ async function Getrecords() {
         const response = await fetch(`https://localhost:7286/api/records`);
 
         if (response.ok === true) {
-            records = await response.json();
+            return await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);

@@ -3,17 +3,19 @@
 var activities = [
     {
         id: 1,
-        directionID: 1,
-        trainerID: 1,
-        dateTime: "2003-11-21",
-        places: 12,
+        nameOfactivity: "Йога",
+        description: "бубубу",
+        photo: "",
+        icon: "",
+        duration: 60,
     },
     {
         id: 2,
-        directionID: 2,
-        trainerID: 2,
-        dateTime: "2003-11-22",
-        places: 13,
+        nameOfactivity: "Растяжка",
+        description: "бубубу",
+        photo: "",
+        icon: "",
+        duration: 60,
     }
 ]
 
@@ -28,15 +30,16 @@ activities.forEach(activity => AddactivityToTable(activity));
 
 
 function AddactivityToTable(activity) {
-    activities.push(activity);
+    if (!activities.some(act => act.id === activity.id)) activities.push(activity);
 
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowactivity${activity.id}">
         <td>${activity.id}</td>
-        <td>${activity.directionID}</td>
-        <td>${activity.trainerID}</td>
-        <td>${activity.dateTime}</td>
-        <td>${activity.places}</td>
+        <td>${activity.nameOfactivity}</td>
+        <td>${activity.description}</td>
+        <td>${activity.photo}</td>
+        <td>${activity.icon}</td>
+        <td>${activity.duration}</td>
         <td> 
             <button class="btn btn-warning m-2" onclick="Selectactivity(${activity})">Change</button> 
             <button class="btn btn-danger m-2" onclick="Deleteactivity(${activity})">Delete</button> 
@@ -47,10 +50,11 @@ function AddactivityToTable(activity) {
 
 function Selectactivity(activity) {
     document.getElementById("ID").value = activity.id;
-    document.getElementById("IDdirections").value = activity.directionID;
-    document.getElementById("trainerID").value = activity.trainerID;
-    document.getElementById("dateTime").value = activity.dateTime;
-    document.getElementById("numberOfSeats").value = activity.places;
+    document.getElementById("nameOfactivity").value = activity.nameOfactivity;
+    document.getElementById("description").value = activity.description;
+    document.getElementById("photo").value = activity.photo;
+    document.getElementById("icon").value = activity.icon;
+    document.getElementById("duration").value = activity.duration;
 }
 
 
@@ -63,10 +67,11 @@ document.getElementById("update").addEventListener("click", () => {
 
 function ClearForms() {
     document.getElementById("ID").value = 0;
-    document.getElementById("IDdirections").value = 1;
-    document.getElementById("trainerID").value = 1;
-    document.getElementById("dateTime").value = "";
-    document.getElementById("numberOfSeats").value = "";
+    document.getElementById("nameOfactivity").value = 1;
+    document.getElementById("description").value = "";
+    document.getElementById("photo").value = "";
+    document.getElementById("icon").value = "";
+    document.getElementById("duration").value = "";
 }
 
 
@@ -75,7 +80,7 @@ async function Getactivities() {
         const response = await fetch(`https://localhost:7286/api/activities`);
 
         if (response.ok === true) {
-            activities = await response.json();
+            return await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);
@@ -133,19 +138,21 @@ async function Addactivity(activity) {
 
 
 function UpdateTableactivity(activity) {
-    activity.directionID = document.getElementById("IDdirections").value;
-    activity.trainerID = document.getElementById("trainerID").value;
-    activity.dateTime = document.getElementById("dateTime").value;
-    activity.places = document.getElementById("numberOfSeats").value;
+    activity.nameOfactivity = document.getElementById("nameOfactivity").value;
+    activity.description = document.getElementById("description").value;
+    activity.photo = document.getElementById("photo").value;
+    activity.icon = document.getElementById("icon").value;
+    activity.duration = document.getElementById("duration").value;
 
 
     let row = document.getElementById(`rowactivity${activity.id}`);
     row.innerHTML = `
                 <td>${activity.id}</td>
-                <td>${activity.directionID}</td>
-                <td>${activity.trainerID}</td>
-                <td>${activity.dateTime}</td>
-                <td>${activity.places}</td>
+                <td>${activity.nameOfactivity}</td>
+                <td>${activity.description}</td>
+                <td>${activity.photo}</td>
+                <td>${activity.icon}</td>
+                <td>${activity.duration}</td>
                 <td> 
                     <button class="btn btn-warning m-2" onclick="Selectactivity(${activity})">Change</button> 
                     <button class="btn btn-danger m-2" onclick="Deleteactivity(${activity})">Delete</button> 

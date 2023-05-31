@@ -28,7 +28,7 @@ rewiews.forEach(rewiew => AddrewiewToTable(rewiew));
 
 
 function AddrewiewToTable(rewiew) {
-    rewiews.push(rewiew);
+    if (!rewiews.some(rew => rew.id === rewiew.id)) rewiews.push(rewiew);
 
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowrewiew${rewiew.id}">
@@ -75,7 +75,7 @@ async function Getrewiews() {
         const response = await fetch(`https://localhost:7286/api/rewiews`);
 
         if (response.ok === true) {
-            rewiews = await response.json();
+            return await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);

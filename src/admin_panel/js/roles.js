@@ -22,7 +22,7 @@ roles.forEach(role => AddroleToTable(role));
 
 
 function AddroleToTable(role) {
-    roles.push(role);
+    if (!roles.some(rol => rol.id === role.id)) roles.push(role);
 
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowrole${role.id}">
@@ -60,7 +60,7 @@ async function Getroles() {
         const response = await fetch(`https://localhost:7286/api/roles`);
 
         if (response.ok === true) {
-            roles = await response.json();
+            return await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);

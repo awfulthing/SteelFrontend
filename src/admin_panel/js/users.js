@@ -47,7 +47,7 @@ users.forEach(user => AddUserToTable(user));
 
 //Добавление пользователей в табилцу
 function AddUserToTable(user) {
-    users.push(user);
+    if (!users.some(u => u.id === user.id)) users.push(user);
 
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowUser${user.id}">
@@ -121,7 +121,7 @@ async function GetUsers() {
         const response = await fetch(`https://localhost:7286/api/users`);
 
         if (response.ok === true) {
-            users = await response.json();
+            return await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);

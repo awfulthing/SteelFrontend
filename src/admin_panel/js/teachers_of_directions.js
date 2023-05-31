@@ -24,7 +24,7 @@ TeatcherDirections.forEach(TeatcherDirection => AddTeatcherDirectionToTable(Teat
 
 
 function AddTeatcherDirectionToTable(TeatcherDirection) {
-    TeatcherDirections.push(TeatcherDirection);
+    if (!TeatcherDirections.some(tea => tea.id === TeatcherDirection.id)) TeatcherDirections.push(TeatcherDirection);
 
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowTeatcherDirection${TeatcherDirection.id}">
@@ -65,7 +65,7 @@ async function GetTeatcherDirections() {
         const response = await fetch(`https://localhost:7286/api/TeatcherDirections`);
 
         if (response.ok === true) {
-            TeatcherDirections = await response.json();
+            return await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);

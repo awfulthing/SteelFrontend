@@ -25,7 +25,7 @@
             <button class="back_admin" onclick="document.location='admin_panel_index.html'"><img
                     src="/src/icons/back_arrow.svg"></button>
         </div>
-        <h2 class="big_header_admin mt-5">Направления</h2>
+        <h2 class="big_header_admin mt-5">Занятия</h2>
         <div class="mb-5">
             <div class="row">
                 <div class="form-group col-md-6 mt-3 mb-3">
@@ -33,30 +33,32 @@
                     <input type="number" name="ID" class="form-control" id="ID" value="1" readonly>
                 </div>
                 <div class="form-group col-md-6 mt-3 mb-3">
-                    <label for="nameOfDirection">Назание</label>
-                    <input type="text" name="nameOfDirection" class="form-control" id="nameOfDirection">
+                    <label for="IDdirections">ID Направления</label>
+                    <input type="number" name="IDdirections" class="form-control" id="IDdirections">
                 </div>
                 <div class="form-group col-md-6 mt-3 mb-3">
-                    <label for="description">Описание</label>
-                    <input type="text" name="description" class="form-control" id="description">
+                    <label for="trainerID">ID преподавателя</label>
+                    <input type="number" name="trainerID" class="form-control" id="trainerID">
                 </div>
                 <div class="form-group col-md-6 mt-3 mb-3">
-                    <label for="photo">Фотография</label>
-                    <input type="text" name="photo" class="form-control" id="photo">
+                    <label for="dateTime">Дата и время</label>
+                    <input type="datetime-local" name="dateTime" class="form-control" id="dateTime">
                 </div>
                 <div class="form-group col-md-6 mt-3 mb-3">
-                    <label for="duration">Длительность</label>
-                    <input type="number" name="duration" class="form-control" id="duration">
+                    <label for="numberOfSeats">Общее кол-во мест</label>
+                    <input type="number" name="numberOfSeats" class="form-control" id="numberOfSeats">
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-1 mt-5">
+                    <button class="btn btn-success" id="submit">Добавить</button>
+                </div>
+                <div class="col-md-1 mt-5">
+                    <button class="btn btn-primary" id="update">Обновить</button>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-1 mt-5">
-                <button class="btn btn-success" id="submit">Добавить</button>
-            </div>
-            <div class="col-md-1 mt-5">
-                <button class="btn btn-primary" id="update">Обновить</button>
-            </div>
+
         </div>
         <hr>
         <div class="row mt-5">
@@ -65,10 +67,10 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Название</th>
-                            <th>Описание</th>
-                            <th>Фотография</th>
-                            <th>Длительность</th>
+                            <th>ID направления</th>
+                            <th>ID преподавателя</th>
+                            <th>Дата и время</th>
+                            <th>Общее кол-во мест</th>
                             <th>Действия</th>
                         </tr>
                     </thead>
@@ -76,8 +78,7 @@
                 </table>
             </div>
         </div>
-    </div>
-    <script src="js/directions.js"></script>
+        <script src="js/trainings.js"></script>
 </body>
 
 </html>
