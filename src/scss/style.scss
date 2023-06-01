@@ -1913,9 +1913,93 @@ a {
     margin-top: 56px;
 }
 .raiting_box {
-    position: absolute;
-    left: 959px;
-    top: 113px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 42px;
+    padding: 24px;
+    background-color: rgba(216, 211, 251, 0.2);
+    border-radius: 15px;
+    border: 4px dashed $purple;
+    margin-bottom: 32px;
+    .banner_btn {
+        border: 3px solid #d0f687;
+        background: white;
+        width: 300px;
+        height: 74px;
+        margin-top: 42px;
+        font-size: 24px;
+    }
+    .banner_btn:hover {
+        border: 3px solid #d0f687;
+        background: $acent;
+    }
+}
+.review_form {
+    margin-top: 32px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.review_textarea {
+    padding: 16px;
+    border: 2px solid $purple;
+    border-radius: 15px;
+    width: 97%;
+    height: 140px;
+    resize: none;
+    font-family: "Exo 2";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    color: $text;
+}
+.review_textarea:focus {
+    border-color: $acent;
+    outline: none;
+}
+.selected_rating {
+    font-family: "Comfortaa";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 20px;
+    color: $text;
+    margin-left: 20px;
+}
+.review_grade {
+    margin-top: 92px;
+    font-family: "Comfortaa";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 32px;
+
+    color: $text;
+}
+.rating_stars {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.warning {
+    font-family: "Exo 2";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    margin-top: 16px;
+    color: $subtitle;
+}
+.review_submit_btn {
+    border: none;
+    background-color: white;
+    width: 28px;
+    height: 28px;
+}
+.review_submit_btn_icon {
+    width: 28px;
+    height: 28px;
 }
 .scedule_cards_row {
     display: flex;
@@ -1925,14 +2009,14 @@ a {
     font-family: "Comfortaa";
     font-style: normal;
     font-weight: 500;
-    font-size: 40px;
+    font-size: 36px;
     line-height: 45px;
     color: $text;
 }
 .raiting_line {
     margin-top: 16px;
     width: 260px;
-    border: 1px solid #d8d3fb;
+    border: 2px solid $acent;
 }
 .raiting_row {
     margin-top: 16px;

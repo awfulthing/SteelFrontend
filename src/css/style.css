@@ -2450,9 +2450,122 @@ a {
 }
 
 .raiting_box {
-  position: absolute;
-  left: 959px;
-  top: 113px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 42px;
+  padding: 24px;
+  background-color: rgba(216, 211, 251, 0.2);
+  border-radius: 15px;
+  border: 4px dashed #d8d3fb;
+  margin-bottom: 32px;
+}
+.raiting_box .banner_btn {
+  border: 3px solid #d0f687;
+  background: white;
+  width: 300px;
+  height: 74px;
+  margin-top: 42px;
+  font-size: 24px;
+}
+.raiting_box .banner_btn:hover {
+  border: 3px solid #d0f687;
+  background: #d0f687;
+}
+
+.review_form {
+  margin-top: 32px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.review_textarea {
+  padding: 16px;
+  border: 2px solid #d8d3fb;
+  border-radius: 15px;
+  width: 97%;
+  height: 140px;
+  resize: none;
+  font-family: "Exo 2";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  color: #323232;
+}
+
+.review_textarea:focus {
+  border-color: #d0f687;
+  outline: none;
+}
+
+.selected_rating {
+  font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 20px;
+  color: #323232;
+  margin-left: 20px;
+}
+
+.review_grade {
+  margin-top: 92px;
+  font-family: "Comfortaa";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  color: #323232;
+}
+
+.rating_stars {
+  margin-bottom: 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.warning {
+  font-family: "Exo 2";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  margin-top: 16px;
+  color: #787878;
+}
+
+.review_submit_btn {
+  border: none;
+  background-color: white;
+  width: 28px;
+  height: 28px;
+}
+
+.review_submit_btn_icon {
+  width: 28px;
+  height: 28px;
 }
 
 .scedule_cards_row {
@@ -2469,7 +2582,7 @@ a {
   font-family: "Comfortaa";
   font-style: normal;
   font-weight: 500;
-  font-size: 40px;
+  font-size: 36px;
   line-height: 45px;
   color: #323232;
 }
@@ -2477,7 +2590,7 @@ a {
 .raiting_line {
   margin-top: 16px;
   width: 260px;
-  border: 1px solid #d8d3fb;
+  border: 2px solid #d0f687;
 }
 
 .raiting_row {
