@@ -1,68 +1,68 @@
-/* = getrecords() */;
+let appointments = [];
 
-var records = [
-    {
-        id: 1,
-        classID: 1,
-        userID: 1,
-    },
-    {
-        id: 2,
-        classID: 2,
-        userID: 2,
+async function fetchData() {
+    try {
+        appointments = await GetAppointments();
+        appointments.forEach(appointment => AddAppointmentToTable(appointment));
+    } catch (error) {
+        console.log(error);
     }
-]
+}
 
+fetchData();
 
 document.getElementById("submit").addEventListener("click", () => {
-    Addrecord();
+    var appointment =
+    {
+        trainingId: document.getElementById("trainingId").value,
+        userId: document.getElementById("userId").value,
+    }
+    AddAppointment(appointment);
     ClearForms();
 })
 
-
-records.forEach(record => AddrecordToTable(record));
-
-
-function AddrecordToTable(record) {
-    if (!records.some(rec => rec.id === record.id)) records.push(record);
-
-    document.getElementById("tableContext").innerHTML += `
-    <tr id="rowrecord${record.id}">
-        <td>${record.id}</td>
-        <td>${record.classID}</td>
-        <td>${record.userID}</td>
-        <td> 
-            <button class="btn btn-warning m-2" onclick="Selectrecord(${record})">Change</button> 
-            <button class="btn btn-danger m-2" onclick="Deleterecord(${record})">Delete</button> 
-        </td>
-    </tr>`;
+function SelectAppointment(appointment) {
+    document.getElementById("id").value = appointment.id;
+    document.getElementById("trainingId").value = appointment.trainingId;
+    document.getElementById("userId").value = appointment.userId;
 }
-
-
-function Selectrecord(record) {
-    document.getElementById("ID").value = record.id;
-    document.getElementById("classID").value = record.classID;
-    document.getElementById("userID").value = record.userID;
-}
-
 
 document.getElementById("update").addEventListener("click", () => {
-    if (Updaterecord(records[document.getElementById("ID").value])) {
+    const appointment =
+    {
+        id: document.getElementById("id").value,
+        trainingId: document.getElementById("trainingId").value,
+        userId: document.getElementById("userId").value,
+    }
+    if (UpdateAppointment(appointment)) {
         ClearForms();
     }
 });
 
+function AddAppointmentToTable(appointment) {
+    if (!appointments.some(rec => rec.id === appointment.id)) appointments.push(appointment);
 
-function ClearForms() {
-    document.getElementById("ID").value = 0;
-    document.getElementById("classID").value = 1;
-    document.getElementById("userID").value = "";
+    document.getElementById("tableContext").innerHTML += `
+    <tr id="rowappointment${appointment.id}">
+        <td>${appointment.id}</td>
+        <td>${appointment.trainingId}</td>
+        <td>${appointment.userId}</td>
+        <td> 
+            <button class="btn btn-warning m-2" onclick='SelectAppointment(${(JSON.stringify(appointment))})'>Change</button> 
+            <button class="btn btn-danger m-2" onclick='DeleteAppointment(${appointment.id})'>Delete</button> 
+        </td>
+    </tr>`;
 }
 
+function ClearForms() {
+    document.getElementById("id").value = 0;
+    document.getElementById("trainingId").value = 1;
+    document.getElementById("userId").value = "";
+}
 
-async function Getrecords() {
+async function GetAppointments() {
     try {
-        const response = await fetch(`https://localhost:7286/api/records`);
+        const response = await fetch(`http://194.87.92.189:5000/api/appointments`);
 
         if (response.ok === true) {
             return await response.json();
@@ -75,16 +75,35 @@ async function Getrecords() {
     }
 }
 
-
-async function Updaterecord(record) {
+async function UpdateAppointment(appointment) {
     try {
-        const recordString = JSON.stringify(record);
-        const response = await fetch(`/api/records/${recordString}`, { method: "PUT" });
+        const appointmentString = JSON.stringify(appointment);
+        const response = await fetch(`http://194.87.92.189:5000/api/appointments/${appointmentString}`, { method: "PUT" });
 
         if (response.ok === true) {
-            const record = await response.json();
+            const appointment = await response.json();
+            UpdateTableAppointment(appointment);
+            return true;
+        } else {
+            const error = await response.json();
+            console.log(error.message);
+            return false;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
 
-            UpdateTablerecord(record);
+async function AddAppointment(appointment) {
+    try {
+        const appointmentString = encodeURIComponent(JSON.stringify(appointment));
+        const response = await fetch(`http://194.87.92.189:5000/api/appointments/${appointmentString}`, { method: "POST" });
+
+        if (response.ok === true) {
+            const appointment = await response.json();
+
+            AddAppointmentToTable(appointment);
 
             return true;
         } else {
@@ -98,56 +117,24 @@ async function Updaterecord(record) {
     }
 }
 
-
-async function Addrecord(record) {
-    try {
-        const recordString = JSON.stringify(record);
-        const response = await fetch(`/api/records/${recordString}`, { method: "POST" });
-
-        if (response.ok === true) {
-            const record = await response.json();
-
-            AddrecordToTable(record);
-
-            return true;
-        } else {
-            const error = await response.json();
-            console.log(error.message);
-            return false;
-        }
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-}
-
-
-function UpdateTablerecord(record) {
-    record.classID = document.getElementById("classID").value;
-    record.userID = document.getElementById("userID").value;
-
-
-    let row = document.getElementById(`rowrecord${record.id}`);
+function UpdateTableAppointment(appointment) {
+    let row = document.getElementById(`rowappointment${appointment.id}`);
     row.innerHTML = `
-                <td>${record.id}</td>
-                <td>${record.classID}</td>
-                <td>${record.userID}</td>
+                <td>${appointment.id}</td>
+                <td>${appointment.trainingId}</td>
+                <td>${appointment.userId}</td>
                 <td> 
-                    <button class="btn btn-warning m-2" onclick="Selectrecord(${record})">Change</button> 
-                    <button class="btn btn-danger m-2" onclick="Deleterecord(${record})">Delete</button> 
+                    <button class="btn btn-warning m-2" onclick='SelectAppointment(${(JSON.stringify(appointment))})'>Change</button> 
+                    <button class="btn btn-danger m-2" onclick='DeleteAppointment(${appointment.id})'>Delete</button> 
                 </td>`
 }
 
-
-async function Deleterecord(record) {
+async function DeleteAppointment(appointmentid) {
     try {
-        const response = await fetch(`/api/records/${record.id}`, { method: "DELETE" });
+        const response = await fetch(`http://194.87.92.189:5000/api/appointments/${appointmentid}`, { method: "DELETE" });
 
         if (response.ok === true) {
-            const record = await response.json();
-
-            DeleteTablerecord(record);
-
+            DeleteTableappointment(appointmentid);
             return true;
         } else {
             const error = await response.json();
@@ -160,9 +147,7 @@ async function Deleterecord(record) {
     }
 }
 
-
-function DeleteTablerecord(record) {
-    records.splice(records.indexOf(record), 1);
-
-    document.getElementById(`rowrecord${record.id}`).remove();
+function DeleteTableappointment(appointmentid) {
+    appointments.splice(appointments.indexOf(appointment => appointment.id === appointmentid), 1);
+    document.getElementById(`rowappointment${appointmentid}`).remove();
 }

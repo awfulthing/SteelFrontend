@@ -328,6 +328,7 @@ nav {
     width: 100%;
     height: 612px;
     background: url("../img/banner_2.png") center center/cover no-repeat;
+    margin-bottom: 100px;
     .banner_header {
         font-family: "Comfortaa";
         font-weight: 300;
@@ -350,7 +351,7 @@ nav {
     }
 }
 .trainers {
-    margin-top: 90px;
+    margin-top: 30px;
     .marker {
         width: 321px;
     }
@@ -649,9 +650,11 @@ nav {
 }
 .days_of_week_header {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 90px;
+    margin-bottom: 32px;
     width: 184px;
     background: $purple;
     border-radius: 9px;
@@ -665,12 +668,6 @@ nav {
 }
 .days_of_week_header:last-child {
     margin-right: 0;
-}
-.cards {
-    display: flex;
-    flex-direction: row;
-    margin-top: 42px;
-    padding: 0;
 }
 
 .map_img {
@@ -771,6 +768,11 @@ nav {
     .banner_btn {
         margin-top: 42px;
         width: 100%;
+        &_disabled {
+            background: #e0f5b6;
+            border: 5px solid #d0f687;
+            box-shadow: 3px 4px 14px rgba(0, 0, 0, 0.11);
+        }
     }
 }
 .overlay {
@@ -842,6 +844,7 @@ nav {
     border: 2px solid #d8d3fb;
     border-radius: 9px;
     margin-right: 6px;
+
     .card_name {
         padding: 0;
         font-family: "Comfortaa";
@@ -973,6 +976,9 @@ nav {
     align-items: center;
     justify-content: center;
 }
+.highlighted {
+    background-color: yellow;
+}
 .nondisp {
     opacity: 0;
 }
@@ -994,7 +1000,6 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     width: 100%;
     height: 342px;
     object-fit: cover;
@@ -1279,6 +1284,7 @@ nav {
     min-width: 100%;
     min-height: 100%;
     border-radius: 100%;
+    background-color: white;
 }
 .account_content {
     margin-left: 254px+52px+42px;
@@ -1476,8 +1482,14 @@ nav {
 .blue_date_card {
     background: #88b8ff;
 }
+.green_date_card {
+    background: #8dbf2c;
+}
 .blue_card {
     background: #e3eeff;
+}
+.green_card {
+    background: rgba(173, 255, 123, 0.23);
 }
 .marg {
     margin-top: 36px;
@@ -1562,7 +1574,7 @@ a {
         font-family: "Comfortaa";
         font-style: normal;
         font-weight: 500;
-        font-size: 32px;
+        font-size: 30px;
         line-height: 36px;
         color: $text;
     }
@@ -2001,7 +2013,19 @@ a {
     width: 28px;
     height: 28px;
 }
-.scedule_cards_row {
+.invisible {
+    display: none;
+}
+.column_with_trainings_card {
+    margin-top: 42px;
+    display: flex;
+    flex-direction: column;
+}
+.line_trainings {
+    display: flex;
+    flex-direction: row;
+}
+.schedule_cards_row {
     display: flex;
     flex-direction: column;
 }
@@ -2088,6 +2112,7 @@ a {
     height: 169px;
     background: url(/src/img/masha.png) center center/cover no-repeat;
     border-radius: 100%;
+    border-color: $acent;
     object-fit: scale-down;
     border: none;
     left: 50%;
@@ -2101,6 +2126,7 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
+    border-color: $acent;
     background-color: rgba(78, 78, 78, 0.6);
     display: flex;
     justify-content: center;
@@ -2197,6 +2223,8 @@ a {
     object-fit: cover;
 }
 .registration_section {
+    position: sticky;
+    top: 0;
     .banner_btn {
         width: 470px;
         margin-top: 54px;
@@ -2329,6 +2357,27 @@ a {
         height: 60px;
         font-size: 24px;
     }
+}
+.alert-danger {
+    width: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.alertContainer {
+    position: absolute;
+    top: 5vh;
+    z-index: 10;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.registration_data input.error {
+    border-color: red;
+}
+.error-message {
+    color: red;
+    margin-top: -15px;
+    margin-bottom: 32px;
 }
 .hidden_on_laptop {
     display: none;

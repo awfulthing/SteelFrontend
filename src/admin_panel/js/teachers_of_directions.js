@@ -1,68 +1,69 @@
-/* = getTeatcherDirections() */;
+let activityTeachers = [];
 
-var TeatcherDirections = [
-    {
-        id: 1,
-        activityID: 1,
-        trainerID: 1,
-    },
-    {
-        id: 2,
-        activityID: 2,
-        trainerID: 2,
+async function fetchData() {
+    try {
+        activityTeachers = await GetActivityTeachers();
+        activityTeachers.forEach(activityTeacher => AddActivityTeacherToTable(activityTeacher));
+    } catch (error) {
+        console.log(error);
     }
-]
+}
 
+fetchData();
 
 document.getElementById("submit").addEventListener("click", () => {
-    AddTeatcherDirection();
+    var activityTeacher =
+    {
+        activityId: document.getElementById("activityId").value,
+        teacherId: document.getElementById("teacherId").value,
+    }
+    AddActivityTeacher(activityTeacher);
     ClearForms();
 })
 
-
-TeatcherDirections.forEach(TeatcherDirection => AddTeatcherDirectionToTable(TeatcherDirection));
-
-
-function AddTeatcherDirectionToTable(TeatcherDirection) {
-    if (!TeatcherDirections.some(tea => tea.id === TeatcherDirection.id)) TeatcherDirections.push(TeatcherDirection);
-
-    document.getElementById("tableContext").innerHTML += `
-    <tr id="rowTeatcherDirection${TeatcherDirection.id}">
-        <td>${TeatcherDirection.id}</td>
-        <td>${TeatcherDirection.activityID}</td>
-        <td>${TeatcherDirection.trainerID}</td>
-        <td> 
-            <button class="btn btn-warning m-2" onclick="SelectTeatcherDirection(${TeatcherDirection})">Change</button> 
-            <button class="btn btn-danger m-2" onclick="DeleteTeatcherDirection(${TeatcherDirection})">Delete</button> 
-        </td>
-    </tr>`;
-}
-
-
-function SelectTeatcherDirection(TeatcherDirection) {
-    document.getElementById("ID").value = TeatcherDirection.id;
-    document.getElementById("activityID").value = TeatcherDirection.activityID;
-    document.getElementById("trainerID").value = TeatcherDirection.trainerID;
+function SelectActivityTeacher(activityTeacher) {
+    document.getElementById("id").value = activityTeacher.id;
+    document.getElementById("activityId").value = activityTeacher.activityId;
+    document.getElementById("teacherId").value = activityTeacher.teacherId;
 }
 
 
 document.getElementById("update").addEventListener("click", () => {
-    if (UpdateTeatcherDirection(TeatcherDirections[document.getElementById("ID").value])) {
+    const activityTeacher =
+    {
+        id: document.getElementById("id").value,
+        activityId: document.getElementById("activityId").value,
+        teacherId: document.getElementById("teacherId").value,
+    }
+    if (UpdateActivityTeacher(activityTeacher)) {
         ClearForms();
     }
 });
 
+function AddActivityTeacherToTable(activityTeacher) {
+    if (!activityTeachers.some(tea => tea.id === activityTeacher.id)) activityTeachers.push(activityTeacher);
 
-function ClearForms() {
-    document.getElementById("ID").value = 0;
-    document.getElementById("activityID").value = "";
-    document.getElementById("trainerID").value = 1;
+    document.getElementById("tableContext").innerHTML += `
+    <tr id="rowactivityTeacher${activityTeacher.id}">
+        <td>${activityTeacher.id}</td>
+        <td>${activityTeacher.activityId}</td>
+        <td>${activityTeacher.teacherId}</td>
+        <td> 
+            <button class="btn btn-warning m-2" onclick='SelectActivityTeacher(${(JSON.stringify(activityTeacher))})'>Change</button> 
+            <button class="btn btn-danger m-2" onclick='DeleteActivityTeacher(${activityTeacher.id})'>Delete</button> 
+        </td>
+    </tr>`;
 }
 
+function ClearForms() {
+    document.getElementById("id").value = 0;
+    document.getElementById("activityId").value = "";
+    document.getElementById("teacherId").value = 1;
+}
 
-async function GetTeatcherDirections() {
+async function GetActivityTeachers() {
     try {
-        const response = await fetch(`https://localhost:7286/api/TeatcherDirections`);
+        const response = await fetch(`http://194.87.92.189:5000/api/activitiesTeachers`);
 
         if (response.ok === true) {
             return await response.json();
@@ -76,16 +77,14 @@ async function GetTeatcherDirections() {
 }
 
 
-async function UpdateTeatcherDirection(TeatcherDirection) {
+async function UpdateActivityTeacher(activityTeacher) {
     try {
-        const TeatcherDirectionString = JSON.stringify(TeatcherDirection);
-        const response = await fetch(`/api/TeatcherDirections/${TeatcherDirectionString}`, { method: "PUT" });
+        const activityTeacherString = JSON.stringify(activityTeacher);
+        const response = await fetch(`http://194.87.92.189:5000/api/activitiesTeachers/${activityTeacherString}`, { method: "PUT" });
 
         if (response.ok === true) {
-            const TeatcherDirection = await response.json();
-
-            UpdateTableTeatcherDirection(TeatcherDirection);
-
+            const activityTeacher = await response.json();
+            UpdateTableActivityTeacher(activityTeacher);
             return true;
         } else {
             const error = await response.json();
@@ -99,16 +98,14 @@ async function UpdateTeatcherDirection(TeatcherDirection) {
 }
 
 
-async function AddTeatcherDirection(TeatcherDirection) {
+async function AddActivityTeacher(activityTeacher) {
     try {
-        const TeatcherDirectionString = JSON.stringify(TeatcherDirection);
-        const response = await fetch(`/api/TeatcherDirections/${TeatcherDirectionString}`, { method: "POST" });
+        const activityTeacherString = encodeURIComponent(JSON.stringify(activityTeacher));
+        const response = await fetch(`http://194.87.92.189:5000/api/activitiesTeachers/${activityTeacherString}`, { method: "POST" });
 
         if (response.ok === true) {
-            const TeatcherDirection = await response.json();
-
-            AddTeatcherDirectionToTable(TeatcherDirection);
-
+            const activityTeacher = await response.json();
+            AddActivityTeacherToTable(activityTeacher);
             return true;
         } else {
             const error = await response.json();
@@ -122,32 +119,25 @@ async function AddTeatcherDirection(TeatcherDirection) {
 }
 
 
-function UpdateTableTeatcherDirection(TeatcherDirection) {
-    TeatcherDirection.activityID = document.getElementById("activityID").value;
-    TeatcherDirection.trainerID = document.getElementById("trainerID").value;
-
-
-    let row = document.getElementById(`rowTeatcherDirection${TeatcherDirection.id}`);
+function UpdateTableActivityTeacher(activityTeacher) {
+    let row = document.getElementById(`rowactivityTeacher${activityTeacher.id}`);
     row.innerHTML = `
-                <td>${TeatcherDirection.id}</td>
-                <td>${TeatcherDirection.activityID}</td>
-                <td>${TeatcherDirection.trainerID}</td>
+                <td>${activityTeacher.id}</td>
+                <td>${activityTeacher.activityId}</td>
+                <td>${activityTeacher.teacherId}</td>
                 <td> 
-                    <button class="btn btn-warning m-2" onclick="SelectTeatcherDirection(${TeatcherDirection})">Change</button> 
-                    <button class="btn btn-danger m-2" onclick="DeleteTeatcherDirection(${TeatcherDirection})">Delete</button> 
+                    <button class="btn btn-warning m-2" onclick='SelectActivityTeacher(${(JSON.stringify(activityTeacher))})'>Change</button> 
+                    <button class="btn btn-danger m-2" onclick='DeleteActivityTeacher(${activityTeacher.id})'>Delete</button> 
                 </td>`
 }
 
 
-async function DeleteTeatcherDirection(TeatcherDirection) {
+async function DeleteActivityTeacher(activityTeacherid) {
     try {
-        const response = await fetch(`/api/TeatcherDirections/${TeatcherDirection.id}`, { method: "DELETE" });
+        const response = await fetch(`http://194.87.92.189:5000/api/activitiesTeachers/${activityTeacherid}`, { method: "DELETE" });
 
         if (response.ok === true) {
-            const TeatcherDirection = await response.json();
-
-            DeleteTableTeatcherDirection(TeatcherDirection);
-
+            DeleteTableactivityTeacher(activityTeacherid);
             return true;
         } else {
             const error = await response.json();
@@ -161,8 +151,7 @@ async function DeleteTeatcherDirection(TeatcherDirection) {
 }
 
 
-function DeleteTableTeatcherDirection(TeatcherDirection) {
-    TeatcherDirections.splice(TeatcherDirections.indexOf(TeatcherDirection), 1);
-
-    document.getElementById(`rowTeatcherDirection${TeatcherDirection.id}`).remove();
+function DeleteTableactivityTeacher(activityTeacherid) {
+    activityTeachers.splice(activityTeachers.indexOf(activityTeacher => activityTeacher.id === activityTeacherid), 1);
+    document.getElementById(`rowactivityTeacher${activityTeacherid}`).remove();
 }

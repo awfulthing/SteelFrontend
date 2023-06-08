@@ -1,107 +1,11 @@
-var reviews = [
-    {
-        id: 1,
-        trainer: {
-            id: 1,
-            experience: "2 года",
-            description: "бубубуб",
-        },
-        user: {
-            id: 1,
-            roleId: 1,
-            surname: "Шинакрук",
-            name: "София",
-            middleName: "Олеговна",
-            email: "shinkaruks@mer.ci.nsu.ru",
-            phone: "+79046478828",
-            password: "123",
-            gender: "Женский",
-            dateOfBirtd: "2003-11-21",
-            photo: "img/triner_ulia.png",
-            vkontakte: "awfultthing",
-            telegram: "awfultthing",
-            city: "Новосибирск"
-        },
-        text: "бубубу",
-        grade: 5,
-    },
-    {
-        id: 2,
-        trainer: {
-            id: 1,
-            experience: "2 года",
-            description: "бубубуб",
-        },
-        user: {
-            id: 2,
-            roleId: 2,
-            surname: "Тябин",
-            name: "Иван",
-            middleName: "Олеговна",
-            email: "shinkaruks@meer.ci.nsu.ru",
-            phone: +79046478828,
-            password: "123",
-            gender: "Женский",
-            dateOfBirtd: "2003-11-21",
-            photo: "img/trainer_denis.png",
-            vkontakte: "awfultthing",
-            telegram: "awfultthing",
-            city: "Новосибирск"
-        },
-        text: "бубубу",
-        grade: 4,
-    },
-    {
-        id: 3,
-        trainer: {
-            id: 1,
-            experience: "2 года",
-            description: "бубубуб",
-        },
-        user: {
-            id: 2,
-            roleId: 2,
-            surname: "Тябин",
-            name: "Иван",
-            middleName: "Олеговна",
-            email: "shinkaruks@meer.ci.nsu.ru",
-            phone: +79046478828,
-            password: "123",
-            gender: "Женский",
-            dateOfBirtd: "2003-11-21",
-            photo: "img/trainer_denis.png",
-            vkontakte: "awfultthing",
-            telegram: "awfultthing",
-            city: "Новосибирск"
-        },
-        text: "бубубу",
-        grade: 4,
-    }
-]
-
-
-
+let reviews = [];
+var reviewFormAdded = false;
+var selectedRating = null;
 var data = localStorage.getItem("data");
 var teacher = JSON.parse(data);
-
-document.getElementById("trainer_page_title").innerText = teacher.user.name + ' ' + teacher.user.surname;
-document.getElementById("account_photo").setAttribute("src", teacher.user.photo);
-document.getElementById("account_name").innerText = teacher.user.name + ' ' + teacher.user.surname;
-document.getElementById("account_add_info").innerText = teacher.activities && teacher.activities.map(activity => activity.nameOfactivity).join(', ') + ', опыт работы ' + teacher.experience;
-document.getElementById("city").innerText = teacher.user.city;
-document.getElementById("vk").innerText = teacher.user.vkontakte;
-document.getElementById("telega").innerText = teacher.user.telegram;
-document.getElementById("phone").innerText = teacher.user.phone;
-document.getElementById("phone_small").innerText = teacher.user.phone;
-document.getElementById("email").innerText = teacher.user.email;
-document.getElementById("email_small").innerText = teacher.user.email;
-document.getElementById("additional_info").innerText = teacher.description;
-
-var lastTwoReviews = reviews.slice(-2);
 var reviewSectionHeaderAdded = false;
 var showAllBtnClicked = false;
-
-lastTwoReviews.forEach(review => AddReviewToPage(review));
+AwaitData()
 
 function AddReviewToPage(review) {
     if (!reviews.some(rew => rew.id === review.id)) reviews.push(review);
@@ -138,7 +42,7 @@ function AddReviewToPage(review) {
                         </div>
                         <div class="raiting">
                             <img src="icons/star_filled.svg" class="raiting_img">
-                            <div class="raiting_text">${review.grade}</div>
+                            <div class="raiting_text">${review.rate}</div>
                         </div>
                     </div>
                     <div class="review_text">
@@ -161,8 +65,8 @@ function ShowAllReviews() {
     reviewSection.appendChild(reviewSectionHeader); // Добавить заголовок обратно
 
     // Расчет средней оценки
-    var totalGrade = reviews.reduce((sum, review) => sum + review.grade, 0);
-    var averageGrade = totalGrade / reviews.length;
+    var totalrate = reviews.reduce((sum, review) => sum + review.rate, 0);
+    var averagerate = totalrate / reviews.length;
 
     // Генерация кода рейтинга
     var ratingSectionContent = `
@@ -170,12 +74,12 @@ function ShowAllReviews() {
             <h2 class="raiting_header">Рейтинг</h2>
             <div class="raiting_line"></div>
             <div class="raiting_row">
-                <div class="raiting_number">${averageGrade.toFixed(1)}</div>
+                <div class="raiting_number">${averagerate.toFixed(1)}</div>
     `;
 
     // Генерация звездочек в зависимости от значения рейтинга
     for (var i = 1; i <= 5; i++) {
-        if (i <= averageGrade) {
+        if (i <= averagerate) {
             ratingSectionContent += `<img src="icons/star_filled.svg" class="raiting_star">`;
         } else {
             ratingSectionContent += `<img src="icons/star.svg" class="raiting_star">`;
@@ -203,7 +107,7 @@ function ShowAllReviews() {
                         </div>
                         <div class="raiting">
                             <img src="icons/star_filled.svg" class="raiting_img">
-                            <div class="raiting_text">${review.grade}</div>
+                            <div class="raiting_text">${review.rate}</div>
                         </div>
                     </div>
                     <div class="review_text">
@@ -222,9 +126,6 @@ function ShowAllReviews() {
     showAllBtnClicked = true;
 }
 
-var reviewFormAdded = false;
-var selectedRating = null;
-
 function ShowReviewForm() {
     if (reviewFormAdded) {
         return; // Если форма отзыва уже добавлена, прекратить выполнение функции
@@ -235,7 +136,7 @@ function ShowReviewForm() {
     var reviewForm = document.createElement("div");
     reviewForm.innerHTML = `
 
-        <h2 class="review_grade">Оцените работу тренера</h2>
+        <h2 class="review_rate">Оцените работу тренера</h2>
         <hr>
         <div class="rating_stars">
             <span class="star" data-rating="1"><img src="icons/star.svg" class="raiting_star"></span>
@@ -323,7 +224,7 @@ function selectRating() {
     selectedRating = rating;
 }
 
-async function PostReview() {
+async function PostReview(review) {
     var textarea = document.querySelector(".review_textarea");
     var reviewText = textarea.value.trim();
 
@@ -346,7 +247,7 @@ async function PostReview() {
             Text: reviewText,
             Rate: selectedRating
         }))
-        const response = await fetch(`/api/reviews/${reviewString}`, { method: "POST" });
+        const response = await fetch(`http://194.87.92.189:5000/api/reviews/${reviewString}`, { method: "POST" });
 
 
 
@@ -374,12 +275,13 @@ async function PostReview() {
     }
 }
 
-async function Getreviews() {
+async function GetReviews() {
     try {
-        const response = await fetch(`/api/reviews/teacher/${teacher.id}`);
+        const response = await fetch(`http://194.87.92.189:5000/api/reviews/teacher/${teacher.id}`);
 
         if (response.ok === true) {
-            return await response.json();
+            let responseData = await response.json();
+            reviews = Array.isArray(responseData) ? responseData : [responseData];
         } else {
             const error = await response.json();
             console.log(error.message);
@@ -388,3 +290,22 @@ async function Getreviews() {
         console.log(error);
     }
 };
+
+async function AwaitData() {
+    await GetReviews()
+    var lastTwoReviews = reviews.slice(-2);
+    lastTwoReviews.forEach(review => AddReviewToPage(review));
+
+    document.getElementById("trainer_page_title").innerText = teacher.user.name + ' ' + teacher.user.surname;
+    document.getElementById("account_photo").setAttribute("src", teacher.user.photo);
+    document.getElementById("account_name").innerText = teacher.user.name + ' ' + teacher.user.surname;
+    document.getElementById("account_add_info").innerText = teacher.activities && teacher.activities.map(activity => activity.name).join(', ') + ', опыт работы ' + teacher.experience;
+    document.getElementById("city").innerText = teacher.user.city;
+    document.getElementById("vk").innerText = teacher.user.vkontakte;
+    document.getElementById("telega").innerText = teacher.user.telegram;
+    document.getElementById("phone").innerText = teacher.user.phone;
+    document.getElementById("phone_small").innerText = teacher.user.phone;
+    document.getElementById("email").innerText = teacher.user.email;
+    document.getElementById("email_small").innerText = teacher.user.email;
+    document.getElementById("additional_info").innerText = teacher.description;
+}

@@ -12,20 +12,24 @@
 </head>
 
 <body>
+    <div class="alertContainer"></div>
     <section class="registration_section">
         <img src="img/registration.png" class="reg_img">
         <a href="index.html"><img src="icons/logo.png" class="reg_logo_img"></a>
         <div class="data_box">
             <div class="container">
                 <h2 class="registration_header">Регистрация</h2>
-                <form class="registration_data" action="#">
+                <form class="registration_data">
                     <label for="name">ФИО</label>
-                    <input required id="name" placeholder="Иванов Иван" type="text">
-                    <label for="e-mail">E-mail</label>
-                    <input required id="e-mail" placeholder="example@gmail.com" type="email">
+                    <input class="name" required id="name" placeholder="Иванов Иван Иванович" type="text">
+                    <div class="nameError" id="nameError" class="error-message"></div>
+                    <label for="phone">Телефон</label>
+                    <input class="phone" required id="phone" placeholder="+7 000 000 00 00" type="text">
+                    <div class="phoneError" id="phoneError" class="error-message"></div>
                     <label for="password">Пароль</label>
-                    <input required id="password" placeholder="•••••••••" type="password">
-                    <button type="submit" class="banner_btn">Зарегистрироваться</button>
+                    <input class="password" required id="password" placeholder="•••••••••" type="password">
+                    <div class="passwordError" id="passwordError" class="error-message"></div>
+                    <button onclick="AddUser(event)" type="submit" class="banner_btn">Зарегистрироваться</button>
                 </form>
                 <div class="registration_subheader">Уже есть аккаунт? <a href="login.html"
                         class="registration_subheader_underlined"> Войти</a></div>
@@ -38,20 +42,24 @@
         <div class="container">
             <div class="data_box">
                 <h2 class="registration_header">Регистрация</h2>
-                <form class="registration_data" action="#">
+                <form class="registration_data">
                     <label for="name">ФИО</label>
-                    <input required id="name" placeholder="Иванов Иван" type="text">
-                    <label for="e-mail">E-mail</label>
-                    <input required id="e-mail" placeholder="example@gmail.com" type="email">
+                    <input class="name" required id="name" placeholder="Иванов Иван Иванович" type="text">
+                    <div class="nameError" id="nameError" class="error-message"></div>
+                    <label for="phone">Телефон</label>
+                    <input class="phone" required id="phone" placeholder="+7 000 000 00 00" type="text">
+                    <div class="phoneError" id="phoneError" class="error-message"></div>
                     <label for="password">Пароль</label>
-                    <input required id="password" placeholder="•••••••••" type="password">
-                    <button type="submit" class="banner_btn">Зарегистрироваться</button>
+                    <input class="password" required id="password" placeholder="•••••••••" type="password">
+                    <div class="passwordError" id="passwordError" class="error-message"></div>
+                    <button onclick="AddUser(event)" type="submit" class="banner_btn">Зарегистрироваться</button>
                 </form>
                 <div class="registration_subheader">Уже есть аккаунт? <a href="login.html"
                         class="registration_subheader_underlined"> Войти</a></div>
             </div>
         </div>
     </section>
+    <script src="js/registration.js"></script>
 </body>
 
 </html>

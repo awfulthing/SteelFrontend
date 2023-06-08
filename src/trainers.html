@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="re">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -26,150 +26,19 @@
         </div>
     </section>
 
-    <section class="dropdowns_container md-hidden_on_contact_page sm-hidden">
+
+    <section class="trainers">
         <div class="container">
-            <div class="filter_container">
-                <div class="filter_box">
-                    <div class="filter_title" onclick="toggleFilter('filter1')">Направления</div>
-                    <img src="icons/dropdown_arrow.png" class="filter_img" onclick="toggleFilter('filter1')">
-                    <div id="filter1" class="filter_content">
-                        <div class="filter_option" onclick="toggleCheckbox(this)">
-                            <input type="checkbox" name="filter1_option" value="option1">
-                            <label>Йога</label>
-                        </div>
-                        <div class="filter_option" onclick="toggleCheckbox(this)">
-                            <input type="checkbox" name="filter1_option" value="option2">
-                            <label>Растяжка</label>
-                        </div>
-                        <div class="filter_option" onclick="toggleCheckbox(this)">
-                            <input type="checkbox" name="filter1_option" value="option3">
-                            <label>Фитнес</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="filter_box">
-                    <div class="filter_title" onclick="toggleFilter('filter2')">Рейтинг</div>
-                    <img src="icons/dropdown_arrow.png" class="filter_img" onclick="toggleFilter('filter2')">
-                    <div id="filter2" class="filter_content">
-                        <div class="filter_option" onclick="toggleCheckbox(this)">
-                            <input type="checkbox" name="filter2_option" value="optionA">
-                            <label>5</label>
-                        </div>
-                        <div class="filter_option" onclick="toggleCheckbox(this)">
-                            <input type="checkbox" name="filter2_option" value="optionB">
-                            <label>4</label>
-                        </div>
-                        <div class="filter_option" onclick="toggleCheckbox(this)">
-                            <input type="checkbox" name="filter2_option" value="optionC">
-                            <label>3</label>
-                        </div>
-                    </div>
-                </div>
+            <div id="trainers_section" class="row wide_width_min">
             </div>
         </div>
     </section>
 
-    <section class="trainers">
-        <div class="container">
-            <div class="row wide_width_min">
-                <div class="col-12 col-md-6">
-                    <div class="content_box">
-                        <img src="img/triner_ulia.png" class="trainer_photo">
-                        <div class="mini_box">
-                            <div class="rate">
-                                <img src="icons/star.svg" class="rate_icon">
-                                <div class="text">4.8</div>
-                            </div>
-                            <h2 class="trainer_names">Юлия Антипова</h2>
-                            <div class="trainer_descr">Растяжка, опыт работы 4 года</div>
-                            <button onclick="document.location='trainer_ulia_page.html'"
-                                class="all_btn green_b">Подробнее<img src="icons/back_arrow_subheader3.svg"
-                                    class="btn_arrow"></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="content_box blue_border">
-                        <img src="img/trainer_artiom.png" class="trainer_photo">
-                        <div class="mini_box">
-                            <div class="rate">
-                                <img src="icons/star.svg" class="rate_icon">
-                                <div class="text">4.6</div>
-                            </div>
-                            <h2 class="trainer_names">Артём Макаров</h2>
-                            <div class="trainer_descr">Йога, опыт работы 2 года</div>
-                            <button class="all_btn green_b">Подробнее<img src="icons/back_arrow_subheader3.svg"
-                                    class="btn_arrow"></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="content_box upper blue_border">
-                        <img src="img/trainer_darya.png" class="trainer_photo">
-                        <div class="mini_box">
-                            <div class="rate">
-                                <img src="icons/star.svg" class="rate_icon">
-                                <div class="text">4.4</div>
-                            </div>
-                            <h2 class="trainer_names">Дарья Маслова</h2>
-                            <div class="trainer_descr">Йога, опыт работы 1,5 года</div>
-                            <button class="all_btn green_b">Подробнее<img src="icons/back_arrow_subheader3.svg"
-                                    class="btn_arrow"></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="content_box upper green_border">
-                        <img src="img/trainer_elena.png" class="trainer_photo">
-                        <div class="mini_box">
-                            <div class="rate">
-                                <img src="icons/star.svg" class="rate_icon">
-                                <div class="text">5.0</div>
-                            </div>
-                            <h2 class="trainer_names">Елена Полякова</h2>
-                            <div class="trainer_descr">Фитнес, опыт работы 5 лет</div>
-                            <button class="all_btn green_b">Подробнее<img src="icons/back_arrow_subheader3.svg"
-                                    class="btn_arrow"></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="content_box upper">
-                        <img src="img/triner_sveta.png" class="trainer_photo">
-                        <div class="mini_box">
-                            <div class="rate">
-                                <img src="icons/star.svg" class="rate_icon">
-                                <div class="text">4.8</div>
-                            </div>
-                            <h2 class="trainer_names">Светлана Носова</h2>
-                            <div class="trainer_descr">Растяжка, опыт работы 2 года</div>
-                            <button class="all_btn green_b">Подробнее<img src="icons/back_arrow_subheader3.svg"
-                                    class="btn_arrow"></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6">
-                    <div class="content_box upper green_border">
-                        <img src="img/trainer_denis.png" class="trainer_photo">
-                        <div class="mini_box">
-                            <div class="rate">
-                                <img src="icons/star.svg" class="rate_icon">
-                                <div class="text">4.9</div>
-                            </div>
-                            <h2 class="trainer_names">Денис Белый</h2>
-                            <div class="trainer_descr">Фитнес, опыт работы 5 лет</div>
-                            <button class="all_btn green_b">Подробнее<img src="icons/back_arrow_subheader3.svg"
-                                    class="btn_arrow"></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
     <div id="footerContainer"></div>
     <script src="js/elements/header.js"></script>
     <script src="js/elements/footer.js"></script>
-    <script src="js/interactive_elems/filters.js"></script>
+    <script src="js/all_trainers_page.js"></script>
 </body>
 
 </html>

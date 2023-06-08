@@ -27,7 +27,7 @@
             <div class="account_name">Мария Игнатова</div>
 
             <div class="settings_bg">
-                <form class="account_data" action="#">
+                <form class="account_data">
                     <div class="row">
                         <div class="col-xxl-6 col-xl-5 col-md-3 form_wrapper">
                             <label for="name">Имя</label>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-xxl-6 col-xl-5 form_wrapper offset-xxl-1 offset-xl-0">
                             <label for="password">Пароль</label>
-                            <input id="password" value="Игнатова" type="password">
+                            <input id="password" value="Игнатова" type="text">
                         </div>
                         <div class="col-xxl-6 col-xl-5 form_wrapper">
                             <label for="phone">Телефон</label>
@@ -70,10 +70,10 @@
                         </div>
                         <div class="col-xxl-6 col-xl-5 form_wrapper offset-xxl-1 offset-xl-0">
                             <label for="telegram">Telegram</label>
-                            <input id="telegram" value="" type="url">
+                            <input id="telegram" value="" type="text">
                         </div>
                     </div>
-                    <button type="submit" class="banner_btn">Сохранить</button>
+                    <button id="update" type="button" class="banner_btn">Сохранить</button>
                 </form>
             </div>
 
@@ -83,6 +83,7 @@
 
     </section>
     <div id="footerContainer"></div>
+    <script src="js/settings.js"></script>
     <script src="js/elements/header.js"></script>
     <script src="js/elements/footer.js"></script>
 </body>

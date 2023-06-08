@@ -1,78 +1,77 @@
 /* = gettrainings() */;
+let trainings = [];
 
-var trainings = [
-    {
-        id: 1,
-        directionID: 1,
-        trainerID: 1,
-        dateTime: "2003-11-21",
-        places: 12,
-    },
-    {
-        id: 2,
-        directionID: 2,
-        trainerID: 2,
-        dateTime: "2003-11-22",
-        places: 13,
+async function fetchData() {
+    try {
+        trainings = await GetTrainings();
+        trainings.forEach(training => AddTrainingToTable(training));
+    } catch (error) {
+        console.log(error);
     }
-]
+}
+fetchData();
+
 
 
 document.getElementById("submit").addEventListener("click", () => {
-    Addtraining();
+    var training = {
+        activityId: document.getElementById("activityId").value,
+        teacherId: document.getElementById("teacherId").value,
+        dateTimeStart: document.getElementById("dateTimeStart").value,
+        totalSeats: document.getElementById("totalSeats").value,
+    }
+    AddTraining(training);
     ClearForms();
 })
 
-
-trainings.forEach(training => AddtrainingToTable(training));
-
-
-function AddtrainingToTable(training) {
-    if (!trainings.some(trai => trai.id === training.id)) trainings.push(training);
-
-    document.getElementById("tableContext").innerHTML += `
-    <tr id="rowtraining${training.id}">
-        <td>${training.id}</td>
-        <td>${training.directionID}</td>
-        <td>${training.trainerID}</td>
-        <td>${training.dateTime}</td>
-        <td>${training.places}</td>
-        <td> 
-            <button class="btn btn-warning m-2" onclick="Selecttraining(${training})">Change</button> 
-            <button class="btn btn-danger m-2" onclick="Deletetraining(${training})">Delete</button> 
-        </td>
-    </tr>`;
+function SelectTraining(training) {
+    document.getElementById("id").value = training.id;
+    document.getElementById("activityId").value = training.activityId;
+    document.getElementById("teacherId").value = training.teacherId;
+    document.getElementById("dateTimeStart").value = training.dateTimeStart;
+    document.getElementById("totalSeats").value = training.totalSeats;
 }
-
-
-function Selecttraining(training) {
-    document.getElementById("ID").value = training.id;
-    document.getElementById("IDdirections").value = training.directionID;
-    document.getElementById("trainerID").value = training.trainerID;
-    document.getElementById("dateTime").value = training.dateTime;
-    document.getElementById("numberOfSeats").value = training.places;
-}
-
 
 document.getElementById("update").addEventListener("click", () => {
-    if (Updatetraining(trainings[document.getElementById("ID").value])) {
+    const training = {
+        id: document.getElementById("id").value,
+        activityId: document.getElementById("activityId").value,
+        teacherId: document.getElementById("teacherId").value,
+        dateTimeStart: document.getElementById("dateTimeStart").value,
+        totalSeats: document.getElementById("totalSeats").value,
+    }
+    if (UpdateTraining(training)) {
         ClearForms();
     }
 });
 
-
-function ClearForms() {
-    document.getElementById("ID").value = 0;
-    document.getElementById("IDdirections").value = 1;
-    document.getElementById("trainerID").value = 1;
-    document.getElementById("dateTime").value = "";
-    document.getElementById("numberOfSeats").value = "";
+function AddTrainingToTable(training) {
+    if (!trainings.some(trai => trai.id === training.id)) trainings.push(training);
+    document.getElementById("tableContext").innerHTML += `
+    <tr id="rowtraining${training.id}">
+        <td>${training.id}</td>
+        <td>${training.activityId}</td>
+        <td>${training.teacherId}</td>
+        <td>${training.dateTimeStart}</td>
+        <td>${training.totalSeats}</td>
+        <td> 
+            <button class="btn btn-warning m-2" onclick='SelectTraining(${(JSON.stringify(training))})'>Change</button> 
+            <button class="btn btn-danger m-2" onclick='Deletetraining(${training.id})'>Delete</button> 
+        </td>
+    </tr>`;
 }
 
+function ClearForms() {
+    document.getElementById("id").value = 0;
+    document.getElementById("activityId").value = 1;
+    document.getElementById("teacherId").value = 1;
+    document.getElementById("dateTimeStart").value = "";
+    document.getElementById("totalSeats").value = "";
+}
 
-async function Gettrainings() {
+async function GetTrainings() {
     try {
-        const response = await fetch(`https://localhost:7286/api/trainings`);
+        const response = await fetch(`http://194.87.92.189:5000/api/trainings`);
 
         if (response.ok === true) {
             return await response.json();
@@ -85,16 +84,36 @@ async function Gettrainings() {
     }
 }
 
-
-async function Updatetraining(training) {
+async function UpdateTraining(training) {
     try {
         const trainingstring = JSON.stringify(training);
-        const response = await fetch(`/api/trainings/${trainingstring}`, { method: "PUT" });
+        const response = await fetch(`http://194.87.92.189:5000/api/trainings/${trainingstring}`, { method: "PUT" });
+
+        if (response.ok === true) {
+            const training = await response.json();
+            UpdateTableTraining(training);
+            return true;
+        } else {
+            const error = await response.json();
+            console.log(error.message);
+            return false;
+        }
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+}
+
+
+async function AddTraining(training) {
+    try {
+        const trainingstring = encodeURIComponent(JSON.stringify(training));
+        const response = await fetch(`http://194.87.92.189:5000/api/trainings/${trainingstring}`, { method: "POST" });
 
         if (response.ok === true) {
             const training = await response.json();
 
-            UpdateTabletraining(training);
+            AddTrainingToTable(training);
 
             return true;
         } else {
@@ -109,59 +128,27 @@ async function Updatetraining(training) {
 }
 
 
-async function Addtraining(training) {
-    try {
-        const trainingstring = JSON.stringify(training);
-        const response = await fetch(`/api/trainings/${trainingstring}`, { method: "POST" });
-
-        if (response.ok === true) {
-            const training = await response.json();
-
-            AddtrainingToTable(training);
-
-            return true;
-        } else {
-            const error = await response.json();
-            console.log(error.message);
-            return false;
-        }
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-}
-
-
-function UpdateTabletraining(training) {
-    training.directionID = document.getElementById("IDdirections").value;
-    training.trainerID = document.getElementById("trainerID").value;
-    training.dateTime = document.getElementById("dateTime").value;
-    training.places = document.getElementById("numberOfSeats").value;
-
-
+function UpdateTableTraining(training) {
     let row = document.getElementById(`rowtraining${training.id}`);
     row.innerHTML = `
                 <td>${training.id}</td>
-                <td>${training.directionID}</td>
-                <td>${training.trainerID}</td>
-                <td>${training.dateTime}</td>
-                <td>${training.places}</td>
+                <td>${training.activityId}</td>
+                <td>${training.teacherId}</td>
+                <td>${training.dateTimeStart}</td>
+                <td>${training.totalSeats}</td>
                 <td> 
-                    <button class="btn btn-warning m-2" onclick="Selecttraining(${training})">Change</button> 
-                    <button class="btn btn-danger m-2" onclick="Deletetraining(${training})">Delete</button> 
+                    <button class="btn btn-warning m-2" onclick='SelectTraining(${(JSON.stringify(training))})'>Change</button> 
+                    <button class="btn btn-danger m-2" onclick='DeleteTraining(${training.id})'>Delete</button> 
                 </td>`
 }
 
 
-async function Deletetraining(training) {
+async function DeleteTraining(trainingid) {
     try {
-        const response = await fetch(`/api/trainings/${training.id}`, { method: "DELETE" });
+        const response = await fetch(`http://194.87.92.189:5000/api/trainings/${trainingid}`, { method: "DELETE" });
 
         if (response.ok === true) {
-            const training = await response.json();
-
-            DeleteTabletraining(training);
-
+            DeleteTableTraining(trainingid);
             return true;
         } else {
             const error = await response.json();
@@ -174,9 +161,7 @@ async function Deletetraining(training) {
     }
 }
 
-
-function DeleteTabletraining(training) {
-    trainings.splice(trainings.indexOf(training), 1);
-
-    document.getElementById(`rowtraining${training.id}`).remove();
+function DeleteTableTraining(trainingid) {
+    trainings.splice(trainings.indexOf(training => training.id === trainingid), 1);
+    document.getElementById(`rowtraining${trainingid}`).remove();
 }

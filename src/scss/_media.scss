@@ -1272,30 +1272,63 @@
     .xl-hidden_on_schedule {
         display: block;
     }
+    .column_of_numbers {
+        display: flex;
+        flex-direction: column;
+        margin-right: auto;
+    }
+    .new_days_of_week_header {
+        font-family: "Comfortaa";
+        font-weight: 600;
+        font-size: 24px;
+        border-radius: 0;
+        line-height: 20px;
+        color: $text;
+    }
     .scedule_container {
+        display: flex;
+        flex-direction: row;
         width: 100%;
         background: rgba(216, 211, 251, 0.43);
         box-shadow: 0px 4px 12px 1px rgba(0, 0, 0, 0.05);
         border-radius: 9px;
         height: fit-content;
         padding: 32px;
+        .training_tag_container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 37px;
+            height: 10px;
+            margin-right: auto;
+            margin-top: 6px;
+        }
+        .training_tag_container:last-child {
+            margin-right: 0;
+        }
+        .training_tag {
+            margin-right: 6px;
+            width: 8px;
+            height: 8px;
+            border-radius: 100%;
+            background: #88b8ff;
+            &_green {
+                background: #91da04;
+            }
+            &_purple {
+                background: #8d7dff;
+            }
+        }
+        .training_tag:last-child {
+            margin-right: 0;
+        }
         .days_of_week_header_row {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
         }
-        .new_days_of_week_header {
-            font-family: "Comfortaa";
-            font-weight: 600;
-            font-size: 24px;
-            border-radius: 0;
-            line-height: 20px;
-            text-align: center;
-            color: $text;
-            margin-right: auto;
-            width: 37px;
-        }
+
         .new_days_of_week_header:last-child {
             margin-right: 0;
         }
@@ -1304,7 +1337,7 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            margin-top: 32px;
+            margin-top: 26px;
         }
         .new_days_of_week {
             width: 37px;
@@ -1316,16 +1349,19 @@
             color: $text;
             margin-right: auto;
             margin-bottom: 8px;
+            height: 36px;
             &_nonactive {
                 color: $subtitle;
             }
             &_active {
                 display: flex;
                 align-items: center;
+                flex-direction: column;
                 justify-content: center;
                 background: #a893ff;
                 border-radius: 5px;
-                height: 32px;
+                padding: 4px;
+                height: fit-content;
                 color: #ffffff;
             }
         }
@@ -1337,40 +1373,22 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            .training_tag_container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 37px;
-                height: 10px;
-                margin-right: auto;
-            }
-            .training_tag_container:last-child {
-                margin-right: 0;
-            }
-            .training_tag {
-                margin-right: 6px;
-                width: 8px;
-                height: 8px;
-                border-radius: 100%;
-                background: #88b8ff;
-                &_green {
-                    background: #91da04;
-                }
-                &_purple {
-                    background: #8d7dff;
-                }
-            }
-            .training_tag:last-child {
-                margin-right: 0;
-            }
         }
     }
+    .days_of_week_header {
+        font-family: "Comfortaa";
+        font-weight: 600;
+        font-size: 24px;
+        border-radius: 0;
+        line-height: 20px;
+        color: $text;
+    }
+    .dropdowns {
+        margin-bottom: 64px;
+    }
     .filter_img {
-        width: 42px;
-        height: 42px;
-        float: right;
-        margin-top: 24px;
+        width: 16px;
+        height: 9px;
     }
     .training_schedule_mini_card_section {
         margin-top: 54px;
@@ -1407,10 +1425,33 @@
             }
         }
     }
-    .demarcation_line {
-        margin-top: 54px;
+    summary::marker {
+        color: $acent;
+    }
+    .dateRange {
+        height: fit-content;
+        margin-top: 74px;
+        margin-bottom: 64px;
+        display: flex;
+        align-items: center;
+        .month {
+            margin-top: 0;
+        }
+    }
+    .schedule_card {
         width: 100%;
-        border: 1px solid #d3d3d3;
+    }
+    .card_line {
+        margin-top: 14px;
+    }
+    .column_with_trainings_card {
+        justify-content: space-between;
+    }
+    .demarcation_line {
+        margin-top: 24px;
+        margin-bottom: 24px;
+        width: 100%;
+        border: 2px solid $acent;
     }
     .additional_info_schedule_card_section {
         margin-top: 54px;
@@ -1730,7 +1771,7 @@
             border-radius: 100%;
             position: absolute;
             top: -195px;
-            left: 110%;
+            left: 160%;
         }
     }
     .main_section {
@@ -1930,7 +1971,7 @@
     .mobile_registration_section {
         background: url(/src/img/registration.png) center center/cover no-repeat;
         width: 100%;
-        height: 900px;
+        height: auto;
         display: block;
         .banner_btn {
             margin-top: 54px;
@@ -2229,9 +2270,10 @@
         height: 23px;
     }
     .filter_img {
-        width: 32px;
-        height: 32px;
-        margin-top: 66px;
+        width: 53px;
+        height: 36px;
+        margin-left: auto;
+        margin-right: 0;
     }
     .scedule_container {
         padding: 20px;
@@ -2242,7 +2284,7 @@
     .scedule_container .new_days_of_week {
         font-size: 20px;
     }
-    .scedule_container .training_tag_line .training_tag {
+    .training_tag {
         width: 7px;
         height: 7px;
     }
@@ -2707,5 +2749,11 @@
     .filter_menu_filer_options_container input[type="checkbox"] {
         width: 16px;
         height: 16px;
+    }
+    .alert-danger {
+        width: 340px;
+    }
+    .error-message {
+        font-size: 11px;
     }
 }

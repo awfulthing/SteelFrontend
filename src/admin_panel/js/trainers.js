@@ -1,29 +1,43 @@
-/* = gettrainers() */;
+let trainers = [];
 
-var trainers = [
-    {
-        id: 1,
-        userID: 1,
-        experience: "2 года",
-        description: "бубубуб",
-    },
-    {
-        id: 2,
-        userID: 2,
-        experience: "2 года",
-        description: "бубубуб",
+async function fetchData() {
+    try {
+        trainers = await GetTrainers();
+        trainers.forEach(trainer => AddTrainerToTable(trainer));
+    } catch (error) {
+        console.log(error);
     }
-]
-
+}
+fetchData();
 
 document.getElementById("submit").addEventListener("click", () => {
-    AddTrainer();
+    var trainer = {
+        userId: document.getElementById("userId").value || 11,
+        experience: document.getElementById("experience").value || 1,
+        description: document.getElementById("description").value || 'default'
+    }
+    AddTrainer(trainer);
     ClearForms();
 })
 
+function SelectTrainer(trainer) {
+    document.getElementById("id").value = trainer.id;
+    document.getElementById("userId").value = trainer.userId;
+    document.getElementById("experience").value = trainer.experience;
+    document.getElementById("description").value = trainer.description;
+}
 
-trainers.forEach(trainer => AddTrainerToTable(trainer));
-
+document.getElementById("update").addEventListener("click", () => {
+    const trainer = {
+        id: document.getElementById("id").value,
+        userID: document.getElementById("userId").value,
+        experience: document.getElementById("experience").value,
+        description: document.getElementById("description").value,
+    }
+    if (UpdateTrainer(trainer)) {
+        ClearForms();
+    }
+});
 
 function AddTrainerToTable(trainer) {
     if (!trainers.some(tra => tra.id === trainer.id)) trainers.push(trainer);
@@ -31,43 +45,26 @@ function AddTrainerToTable(trainer) {
     document.getElementById("tableContext").innerHTML += `
     <tr id="rowtrainer${trainer.id}">
         <td>${trainer.id}</td>
-        <td>${trainer.userID}</td>
+        <td>${trainer.userId}</td>
         <td>${trainer.experience}</td>
         <td>${trainer.description}</td>
         <td> 
-            <button class="btn btn-warning m-2" onclick="SelectTrainer(${trainer})">Change</button> 
-            <button class="btn btn-danger m-2" onclick="DeleteTrainer(${trainer})">Delete</button> 
+            <button class="btn btn-warning m-2" onclick='SelectTrainer(${(JSON.stringify(trainer))})'>Change</button> 
+            <button class="btn btn-danger m-2" onclick='DeleteTrainer(${trainer.id})'>Delete</button> 
         </td>
     </tr>`;
 }
 
-
-function SelectTrainer(trainer) {
-    document.getElementById("ID").value = trainer.id;
-    document.getElementById("userID").value = trainer.userID;
-    document.getElementById("experience").value = trainer.experience;
-    document.getElementById("description").value = trainer.description;
-}
-
-
-document.getElementById("update").addEventListener("click", () => {
-    if (UpdateTrainer(trainers[document.getElementById("ID").value])) {
-        ClearForms();
-    }
-});
-
-
 function ClearForms() {
-    document.getElementById("ID").value = 0;
-    document.getElementById("userID").value = 1;
+    document.getElementById("id").value = 0;
+    document.getElementById("userId").value = 1;
     document.getElementById("experience").value = "";
     document.getElementById("description").value = "";
 }
 
-
 async function GetTrainers() {
     try {
-        const response = await fetch(`https://localhost:7286/api/trainers`);
+        const response = await fetch(`http://194.87.92.189:5000/api/teachers`);
 
         if (response.ok === true) {
             return await response.json();
@@ -80,17 +77,15 @@ async function GetTrainers() {
     }
 }
 
-
 async function UpdateTrainer(trainer) {
     try {
+        console.log(trainer);
         const trainerString = JSON.stringify(trainer);
-        const response = await fetch(`/api/trainers/${trainerString}`, { method: "PUT" });
+        const response = await fetch(`http://194.87.92.189:5000/api/teachers/${trainerString}`, { method: "PUT" });
 
         if (response.ok === true) {
             const trainer = await response.json();
-
-            UpdateTabletrainer(trainer);
-
+            UpdateTableTrainer(trainer);
             return true;
         } else {
             const error = await response.json();
@@ -103,11 +98,10 @@ async function UpdateTrainer(trainer) {
     }
 }
 
-
 async function AddTrainer(trainer) {
     try {
-        const trainerString = JSON.stringify(trainer);
-        const response = await fetch(`/api/trainers/${trainerString}`, { method: "POST" });
+        const trainerString = encodeURIComponent(JSON.stringify(trainer));
+        const response = await fetch(`http://194.87.92.189:5000/api/teachers/${trainerString}`, { method: "POST" });
 
         if (response.ok === true) {
             const trainer = await response.json();
@@ -128,33 +122,25 @@ async function AddTrainer(trainer) {
 
 
 function UpdateTableTrainer(trainer) {
-    trainer.userID = document.getElementById("userID").value;
-    trainer.experience = document.getElementById("experience").value;
-    trainer.description = document.getElementById("description").value;
-
-
     let row = document.getElementById(`rowtrainer${trainer.id}`);
     row.innerHTML = `
                 <td>${trainer.id}</td>
-                <td>${trainer.userID}</td>
+                <td>${trainer.userId}</td>
                 <td>${trainer.experience}</td>
                 <td>${trainer.description}</td>
                 <td> 
-                    <button class="btn btn-warning m-2" onclick="SelectTrainer(${trainer})">Change</button> 
-                    <button class="btn btn-danger m-2" onclick="DeleteTrainer(${trainer})">Delete</button> 
+                    <button class="btn btn-warning m-2" onclick='SelectTrainer(${(JSON.stringify(trainer))})'>Change</button> 
+                    <button class="btn btn-danger m-2" onclick='DeleteTrainer(${trainer.id})'>Delete</button> 
                 </td>`
 }
 
 
-async function DeleteTrainer(trainer) {
+async function DeleteTrainer(trainerid) {
     try {
-        const response = await fetch(`/api/trainers/${trainer.id}`, { method: "DELETE" });
+        const response = await fetch(`http://194.87.92.189:5000/api/teachers/${trainerid}`, { method: "DELETE" });
 
         if (response.ok === true) {
-            const trainer = await response.json();
-
-            DeleteTableTrainer(trainer);
-
+            DeleteTableTrainer(trainerid);
             return true;
         } else {
             const error = await response.json();
@@ -168,8 +154,7 @@ async function DeleteTrainer(trainer) {
 }
 
 
-function DeleteTableTrainer(trainer) {
-    trainers.splice(trainers.indexOf(trainer), 1);
-
-    document.getElementById(`rowtrainer${trainer.id}`).remove();
+function DeleteTableTrainer(trainerid) {
+    trainers.splice(trainers.indexOf(trainer => trainer.id === trainerid), 1);
+    document.getElementById(`rowtrainer${trainerid}`).remove();
 }

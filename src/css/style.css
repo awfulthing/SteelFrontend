@@ -424,6 +424,7 @@ nav {
   width: 100%;
   height: 612px;
   background: url("../img/banner_2.png") center center/cover no-repeat;
+  margin-bottom: 100px;
 }
 .second_banner .banner_header {
   font-family: "Comfortaa";
@@ -447,7 +448,7 @@ nav {
 }
 
 .trainers {
-  margin-top: 90px;
+  margin-top: 30px;
 }
 .trainers .marker {
   width: 321px;
@@ -843,6 +844,10 @@ nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -850,6 +855,7 @@ nav {
       -ms-flex-pack: center;
           justify-content: center;
   height: 90px;
+  margin-bottom: 32px;
   width: 184px;
   background: #d8d3fb;
   border-radius: 9px;
@@ -864,18 +870,6 @@ nav {
 
 .days_of_week_header:last-child {
   margin-right: 0;
-}
-
-.cards {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  margin-top: 42px;
-  padding: 0;
 }
 
 .map_img {
@@ -998,6 +992,12 @@ nav {
 .trainer_popup_wrapper .banner_btn {
   margin-top: 42px;
   width: 100%;
+}
+.trainer_popup_wrapper .banner_btn_disabled {
+  background: #e0f5b6;
+  border: 5px solid #d0f687;
+  -webkit-box-shadow: 3px 4px 14px rgba(0, 0, 0, 0.11);
+          box-shadow: 3px 4px 14px rgba(0, 0, 0, 0.11);
 }
 
 .overlay {
@@ -1238,6 +1238,10 @@ nav {
           justify-content: center;
 }
 
+.highlighted {
+  background-color: yellow;
+}
+
 .nondisp {
   opacity: 0;
 }
@@ -1265,7 +1269,6 @@ nav {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  overflow: hidden;
   width: 100%;
   height: 342px;
   -o-object-fit: cover;
@@ -1621,6 +1624,7 @@ nav {
   min-width: 100%;
   min-height: 100%;
   border-radius: 100%;
+  background-color: white;
 }
 
 .account_content {
@@ -1886,8 +1890,16 @@ nav {
   background: #88b8ff;
 }
 
+.green_date_card {
+  background: #8dbf2c;
+}
+
 .blue_card {
   background: #e3eeff;
+}
+
+.green_card {
+  background: rgba(173, 255, 123, 0.23);
 }
 
 .marg {
@@ -2008,7 +2020,7 @@ a {
   font-family: "Comfortaa";
   font-style: normal;
   font-weight: 500;
-  font-size: 32px;
+  font-size: 30px;
   line-height: 36px;
   color: #323232;
 }
@@ -2568,7 +2580,32 @@ a {
   height: 28px;
 }
 
-.scedule_cards_row {
+.invisible {
+  display: none;
+}
+
+.column_with_trainings_card {
+  margin-top: 42px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.line_trainings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.schedule_cards_row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2685,6 +2722,7 @@ a {
   height: 169px;
   background: url(/src/img/masha.png) center center/cover no-repeat;
   border-radius: 100%;
+  border-color: #d0f687;
   -o-object-fit: scale-down;
      object-fit: scale-down;
   border: none;
@@ -2700,6 +2738,7 @@ a {
   left: 0;
   width: 100%;
   height: 100%;
+  border-color: #d0f687;
   background-color: rgba(78, 78, 78, 0.6);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2827,6 +2866,10 @@ a {
      object-fit: cover;
 }
 
+.registration_section {
+  position: sticky;
+  top: 0;
+}
 .registration_section .banner_btn {
   width: 470px;
   margin-top: 54px;
@@ -2988,6 +3031,38 @@ a {
   width: 300px;
   height: 60px;
   font-size: 24px;
+}
+
+.alert-danger {
+  width: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.alertContainer {
+  position: absolute;
+  top: 5vh;
+  z-index: 10;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
+.registration_data input.error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  margin-top: -15px;
+  margin-bottom: 32px;
 }
 
 .hidden_on_laptop {
@@ -4236,7 +4311,32 @@ a {
   .xl-hidden_on_schedule {
     display: block;
   }
+  .column_of_numbers {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    margin-right: auto;
+  }
+  .new_days_of_week_header {
+    font-family: "Comfortaa";
+    font-weight: 600;
+    font-size: 24px;
+    border-radius: 0;
+    line-height: 20px;
+    color: #323232;
+  }
   .scedule_container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
     width: 100%;
     background: rgba(216, 211, 251, 0.43);
     -webkit-box-shadow: 0px 4px 12px 1px rgba(0, 0, 0, 0.05);
@@ -4246,6 +4346,40 @@ a {
     height: -moz-fit-content;
     height: fit-content;
     padding: 32px;
+  }
+  .scedule_container .training_tag_container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 37px;
+    height: 10px;
+    margin-right: auto;
+    margin-top: 6px;
+  }
+  .scedule_container .training_tag_container:last-child {
+    margin-right: 0;
+  }
+  .scedule_container .training_tag {
+    margin-right: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background: #88b8ff;
+  }
+  .scedule_container .training_tag_green {
+    background: #91da04;
+  }
+  .scedule_container .training_tag_purple {
+    background: #8d7dff;
+  }
+  .scedule_container .training_tag:last-child {
+    margin-right: 0;
   }
   .scedule_container .days_of_week_header_row {
     display: -webkit-box;
@@ -4261,17 +4395,6 @@ a {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-  }
-  .scedule_container .new_days_of_week_header {
-    font-family: "Comfortaa";
-    font-weight: 600;
-    font-size: 24px;
-    border-radius: 0;
-    line-height: 20px;
-    text-align: center;
-    color: #323232;
-    margin-right: auto;
-    width: 37px;
   }
   .scedule_container .new_days_of_week_header:last-child {
     margin-right: 0;
@@ -4290,7 +4413,7 @@ a {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    margin-top: 32px;
+    margin-top: 26px;
   }
   .scedule_container .new_days_of_week {
     width: 37px;
@@ -4302,6 +4425,7 @@ a {
     color: #323232;
     margin-right: auto;
     margin-bottom: 8px;
+    height: 36px;
   }
   .scedule_container .new_days_of_week_nonactive {
     color: #787878;
@@ -4313,12 +4437,19 @@ a {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
     background: #a893ff;
     border-radius: 5px;
-    height: 32px;
+    padding: 4px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
     color: #ffffff;
   }
   .scedule_container .new_days_of_week:last-child {
@@ -4339,44 +4470,20 @@ a {
         -ms-flex-pack: center;
             justify-content: center;
   }
-  .scedule_container .training_tag_line .training_tag_container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    width: 37px;
-    height: 10px;
-    margin-right: auto;
+  .days_of_week_header {
+    font-family: "Comfortaa";
+    font-weight: 600;
+    font-size: 24px;
+    border-radius: 0;
+    line-height: 20px;
+    color: #323232;
   }
-  .scedule_container .training_tag_line .training_tag_container:last-child {
-    margin-right: 0;
-  }
-  .scedule_container .training_tag_line .training_tag {
-    margin-right: 6px;
-    width: 8px;
-    height: 8px;
-    border-radius: 100%;
-    background: #88b8ff;
-  }
-  .scedule_container .training_tag_line .training_tag_green {
-    background: #91da04;
-  }
-  .scedule_container .training_tag_line .training_tag_purple {
-    background: #8d7dff;
-  }
-  .scedule_container .training_tag_line .training_tag:last-child {
-    margin-right: 0;
+  .dropdowns {
+    margin-bottom: 64px;
   }
   .filter_img {
-    width: 42px;
-    height: 42px;
-    float: right;
-    margin-top: 24px;
+    width: 16px;
+    height: 9px;
   }
   .training_schedule_mini_card_section {
     margin-top: 54px;
@@ -4425,10 +4532,41 @@ a {
     margin-bottom: 0;
     color: #323232;
   }
-  .demarcation_line {
-    margin-top: 54px;
+  summary::marker {
+    color: #d0f687;
+  }
+  .dateRange {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin-top: 74px;
+    margin-bottom: 64px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .dateRange .month {
+    margin-top: 0;
+  }
+  .schedule_card {
     width: 100%;
-    border: 1px solid #d3d3d3;
+  }
+  .card_line {
+    margin-top: 14px;
+  }
+  .column_with_trainings_card {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+  .demarcation_line {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    width: 100%;
+    border: 2px solid #d0f687;
   }
   .additional_info_schedule_card_section {
     margin-top: 54px;
@@ -4788,7 +4926,7 @@ a {
     border-radius: 100%;
     position: absolute;
     top: -195px;
-    left: 110%;
+    left: 160%;
   }
   .main_section .main_information .header_marker {
     z-index: 0;
@@ -4992,7 +5130,7 @@ a {
   .mobile_registration_section {
     background: url(/src/img/registration.png) center center/cover no-repeat;
     width: 100%;
-    height: 900px;
+    height: auto;
     display: block;
   }
   .mobile_registration_section .banner_btn {
@@ -5314,9 +5452,10 @@ a {
     height: 23px;
   }
   .filter_img {
-    width: 32px;
-    height: 32px;
-    margin-top: 66px;
+    width: 53px;
+    height: 36px;
+    margin-left: auto;
+    margin-right: 0;
   }
   .scedule_container {
     padding: 20px;
@@ -5327,7 +5466,7 @@ a {
   .scedule_container .new_days_of_week {
     font-size: 20px;
   }
-  .scedule_container .training_tag_line .training_tag {
+  .training_tag {
     width: 7px;
     height: 7px;
   }
@@ -5774,5 +5913,11 @@ a {
   .filter_menu_filer_options_container input[type=checkbox] {
     width: 16px;
     height: 16px;
+  }
+  .alert-danger {
+    width: 340px;
+  }
+  .error-message {
+    font-size: 11px;
   }
 }/*# sourceMappingURL=style.css.map */

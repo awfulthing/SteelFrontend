@@ -15,186 +15,59 @@
 <body>
     <div id="headerContainer"></div>
 
-    <div class="banner_acc"></div>
-    <section class="account_info">
-        <div class="container">
-            <div class="photo_wrapper">
-                <img src="img/masha.png" alt="photo" class="account_photo">
+    <section id="user" class="user">
+        <div class="banner_acc"></div>
+        <section id="account_header_info" class="account_info">
+
+        </section>
+
+        <div id="popup_add_info" class="popup_add_info_wrapper xl-hidden">
+            <div class="popup_header">
+                Подробная информация
             </div>
-            <div class="account_content">
-                <div class="account_name">Мария Игнатова</div>
-                <div class="account_age">25 лет</div>
-                <div class="account_descr">
-                    <img src="icons/pin.svg" alt="pin" class="account_icon">
-                    <div class="account_text">Россия, г.Новосибирск</div>
-                    <img src="icons/vk_logo.svg" alt="vk" class="account_icon sec">
-                    <div class="account_text">mmmaasshaa</div>
-                    <img src="icons/info.svg" alt="vk" id="account_icon_add_info" class="account_icon sec xl-hidden">
+        </div>
 
-                </div>
-            </div>
-            <button onclick="document.location='settings.html'" class="gear_btn"><img src="icons/gear.svg"
-                    class="gear"></button>
-        </div>
-    </section>
-
-    <div class="popup_add_info_wrapper xl-hidden">
-        <div class="popup_header">
-            Подробная информация
-        </div>
-        <div class="popup_row_inf">
-            <img src="icons/phone.svg" alt="phone" class="popup_icon">
-            <div class="popup_text">+7 (913) 734-73-23</div>
-        </div>
-        <div class="popup_row_inf">
-            <img src="icons/convert.svg" alt="phone" class="popup_icon">
-            <div class="popup_text">ignatovama@gmail.com</div>
-        </div>
-    </div>
-
-    <section class="main_section">
-        <div class="container">
-            <div class="wide_width row">
-                <div class="col-md-4 col-xl-3 md-hidden_on_account">
-                    <div class="additional_info ">
-                        <div class="info_col">
-                            <img src="icons/phone.svg" alt="pin" class="info_icon">
-                            <div class="info_text">+7 (913) 734-73-23</div>
-                        </div>
-                        <div class="info_col down">
-                            <img src="icons/convert.svg" alt="pin" class="info_icon">
-                            <div class="info_text">ignatovama@gmail.com</div>
-                        </div>
+        <section class="main_section">
+            <div class="container">
+                <div class="wide_width row">
+                    <div class="col-md-4 col-xl-3 md-hidden_on_account">
+                        <div id="additional_info" class="additional_info "></div>
                     </div>
-                </div>
-                <div class="col-md-12  col-lg-8 col-xl-9">
-                    <div class="main_information">
-                        <div class="row_inf">
-                            <div class="header_marker">
-                                <img src="icons/marker_train.png" class="marker">
-                                <span class="marker_text"> Мой календарь </span>
-                            </div>
-                            <button class="all_btn">Подробнее<img src="icons/back_arrow_subheader3.svg"
-                                    class="btn_arrow"></button>
-                        </div>
 
-                        <div class="calendar_cards_section">
-
-                            <div class="calendar_card">
-
-                                <div class="date_card">
-                                    <div class="date_card_text">
-                                        7<br>ПН
-                                    </div>
-                                </div>
-
-                                <div class="card_info">
-                                    <div class="name_line">
-                                        <div class="activity_name">Растяжка</div>
-                                        <svg class="activity_icon" viewBox="0 0 42 42"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M8.75 35L17.3425 34.083L22.113 24.9165L24.0223 15.75L15.4315 17.584L18.2945 21.2502M25.9315 26.7505H29.75V35M28 12.25C28.9283 12.25 29.8185 11.8813 30.4749 11.2249C31.1313 10.5685 31.5 9.67826 31.5 8.75C31.5 7.82174 31.1313 6.9315 30.4749 6.27513C29.8185 5.61875 28.9283 5.25 28 5.25C27.0717 5.25 26.1815 5.61875 25.5251 6.27513C24.8688 6.9315 24.5 7.82174 24.5 8.75C24.5 9.67826 24.8688 10.5685 25.5251 11.2249C26.1815 11.8813 27.0717 12.25 28 12.25Z" />
-                                        </svg>
-                                    </div>
-                                    <div class="name_line">
-                                        <div class="trainer_name">Тренер: Юлия Антипова</div>
-                                        <div class="trainer_name">16:00 – 18:00</div>
-                                    </div>
-                                </div>
-
-                                <button class="more_btn"><img src="icons/back_arrow.svg" class="more_btn_img"></button>
-
-                            </div>
-
-
-                            <div class="calendar_card blue_card marg">
-
-                                <div class="date_card blue_date_card">
-                                    <div class="date_card_text">
-                                        9<br>СР
-                                    </div>
-                                </div>
-
-                                <div class="card_info">
-                                    <div class="name_line">
-                                        <div class="activity_name">Йога</div>
-                                        <svg class="activity_icon" viewBox="0 0 42 42"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M25.4992 26.2568L27.0007 29.4856C27.0007 29.4856 33.7505 30.9188 33.7505 34.3278C33.7505 36.7498 30.7475 36.7498 30.7475 36.7498H22.75L18.8125 34.5623" />
-                                            <path
-                                                d="M16.5008 26.2568L15.001 29.4856C15.001 29.4856 8.24951 30.9188 8.24951 34.3278C8.24951 36.7498 11.2525 36.7498 11.2525 36.7498H14.875L18.8125 34.5623L23.625 31.4998" />
-                                            <path
-                                                d="M5.25 27.8705C5.25 27.8705 9.00025 27.0638 11.2507 26.257C13.4995 14.9555 20.2475 15.7623 21 15.7623C21.7507 15.7623 28.5005 14.9555 30.7492 26.257C32.9997 27.062 36.75 27.8705 36.75 27.8705M21 12.25C21.9283 12.25 22.8185 11.8813 23.4749 11.2249C24.1313 10.5685 24.5 9.67826 24.5 8.75C24.5 7.82174 24.1313 6.9315 23.4749 6.27513C22.8185 5.61875 21.9283 5.25 21 5.25C20.0717 5.25 19.1815 5.61875 18.5251 6.27513C17.8687 6.9315 17.5 7.82174 17.5 8.75C17.5 9.67826 17.8687 10.5685 18.5251 11.2249C19.1815 11.8813 20.0717 12.25 21 12.25Z" />
-                                        </svg>
-                                    </div>
-                                    <div class="name_line">
-                                        <div class="trainer_name">Тренер: Артём Макаров</div>
-                                        <div class="trainer_name with_m">16:00 – 18:00</div>
-                                    </div>
-                                </div>
-
-                                <button class="more_btn"><img src="icons/back_arrow.svg" class="more_btn_img"></button>
-                            </div>
-                        </div>
-
-                        <div class="achievment_block">
+                    <div class="col-md-12  col-lg-8 col-xl-9">
+                        <div class="main_information">
                             <div class="row_inf">
                                 <div class="header_marker">
                                     <img src="icons/marker_train.png" class="marker">
-                                    <span class="marker_text"> Ачивки </span>
+                                    <span class="marker_text"> Мой календарь </span>
                                 </div>
-                                <a href="achievments.html"> <button class="all_btn">Подробнее<img
-                                            src="icons/back_arrow_subheader3.svg" class="btn_arrow"> </button></a>
                             </div>
 
-                            <div class="cards_row">
+                            <div id="calendar_cards_section" class="calendar_cards_section"></div>
 
-                                <div class="card_wrapper">
-                                    <div class="achievment_card">
-                                        <img src="img/achievment1.png" class="achievment_img">
+                            <div class="achievment_block">
+                                <div class="row_inf">
+                                    <div class="header_marker">
+                                        <img src="icons/marker_train.png" class="marker">
+                                        <span class="marker_text"> Ачивки </span>
                                     </div>
-                                    <div class="achievment_card_name">Новичок</div>
+                                    <a href="achievments.html"> <button class="all_btn">Подробнее<img
+                                                src="icons/back_arrow_subheader3.svg" class="btn_arrow"> </button></a>
                                 </div>
 
-                                <div class="card_wrapper">
-                                    <div class="achievment_card">
-                                        <img src="img/achievment2.png" class="achievment_img">
-                                    </div>
-                                    <div class="achievment_card_name">Первые шаги</div>
-                                </div>
-
-                                <div class="card_wrapper">
-                                    <div class="achievment_card">
-                                        <img src="img/achievment3.png" class="achievment_img">
-                                    </div>
-                                    <div class="achievment_card_name">Бывалый</div>
-                                </div>
-
-                                <div class="card_wrapper sm-hidden">
-                                    <div class="achievment_card">
-                                        <img src="img/achievment4.png" class="achievment_img">
-                                    </div>
-                                    <div class="achievment_card_name">Заядлый спортсмен</div>
-                                </div>
-
-                                <div class="card_wrapper sm-hidden">
-                                    <div class="achievment_card">
-                                        <img src="img/achievment5.png" class="achievment_img">
-                                    </div>
-                                    <div class="achievment_card_name">Любитель фитнеса</div>
-                                </div>
-
+                                <div id="achievment_block" class="cards_row"> </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </section>
 
+
     <div id="footerContainer"></div>
+    <script src="js/user_account.js"></script>
+    <script src="js/interactive_elems/account_popup.js"></script>
     <script src="js/elements/header.js"></script>
     <script src="js/elements/footer.js"></script>
 </body>

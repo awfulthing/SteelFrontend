@@ -1,68 +1,69 @@
-/* = getvisits() */;
+let attendees = [];
 
-var visits = [
-    {
-        id: 1,
-        activityID: 1,
-        userID: 1,
-    },
-    {
-        id: 2,
-        activityID: 2,
-        userID: 2,
+async function fetchData() {
+    try {
+        attendees = await GetAttendees();
+        attendees.forEach(attend => AddAttendToTable(attend));
+    } catch (error) {
+        console.log(error);
     }
-]
+}
 
+fetchData();
 
 document.getElementById("submit").addEventListener("click", () => {
-    Addvisit();
+    var attend =
+    {
+        trainingId: document.getElementById("trainingId").value,
+        userId: document.getElementById("userId").value,
+    }
+    AddAttend(attend);
     ClearForms();
 })
 
-
-visits.forEach(visit => AddvisitToTable(visit));
-
-
-function AddvisitToTable(visit) {
-    if (!visits.some(v => v.id === visit.id)) visits.push(visit);
-
-    document.getElementById("tableContext").innerHTML += `
-    <tr id="rowvisit${visit.id}">
-        <td>${visit.id}</td>
-        <td>${visit.activityID}</td>
-        <td>${visit.userID}</td>
-        <td> 
-            <button class="btn btn-warning m-2" onclick="Selectvisit(${visit})">Change</button> 
-            <button class="btn btn-danger m-2" onclick="Deletevisit(${visit})">Delete</button> 
-        </td>
-    </tr>`;
-}
-
-
-function Selectvisit(visit) {
-    document.getElementById("ID").value = visit.id;
-    document.getElementById("activityID").value = visit.activityID;
-    document.getElementById("userID").value = visit.userID;
+function SelectAttend(attend) {
+    document.getElementById("id").value = attend.id;
+    document.getElementById("trainingId").value = attend.trainingId;
+    document.getElementById("userId").value = attend.userId;
 }
 
 
 document.getElementById("update").addEventListener("click", () => {
-    if (Updatevisit(visits[document.getElementById("ID").value])) {
+    const attend =
+    {
+        id: document.getElementById("id").value,
+        trainingId: document.getElementById("trainingId").value,
+        userId: document.getElementById("userId").value,
+    }
+    if (UpdateAttend(attend)) {
         ClearForms();
     }
 });
 
+function AddAttendToTable(attend) {
+    if (!attendees.some(v => v.id === attend.id)) attendees.push(attend);
 
-function ClearForms() {
-    document.getElementById("ID").value = 0;
-    document.getElementById("activityID").value = 1;
-    document.getElementById("userID").value = "";
+    document.getElementById("tableContext").innerHTML += `
+    <tr id="rowattend${attend.id}">
+        <td>${attend.id}</td>
+        <td>${attend.trainingId}</td>
+        <td>${attend.userId}</td>
+        <td> 
+            <button class="btn btn-warning m-2" onclick='SelectAttend(${(JSON.stringify(attend))})'>Change</button> 
+            <button class="btn btn-danger m-2" onclick='DeleteAttend(${attend.id})'>Delete</button> 
+        </td>
+    </tr>`;
 }
 
+function ClearForms() {
+    document.getElementById("id").value = 0;
+    document.getElementById("trainingId").value = 1;
+    document.getElementById("userId").value = "";
+}
 
-async function Getvisits() {
+async function GetAttendees() {
     try {
-        const response = await fetch(`https://localhost:7286/api/visits`);
+        const response = await fetch(`http://194.87.92.189:5000/api/attendees`);
 
         if (response.ok === true) {
             return await response.json();
@@ -75,17 +76,14 @@ async function Getvisits() {
     }
 }
 
-
-async function Updatevisit(visit) {
+async function UpdateAttend(attend) {
     try {
-        const visitString = JSON.stringify(visit);
-        const response = await fetch(`/api/visits/${visitString}`, { method: "PUT" });
+        const attendeestring = JSON.stringify(attend);
+        const response = await fetch(`http://194.87.92.189:5000/api/attendees/${attendeestring}`, { method: "PUT" });
 
         if (response.ok === true) {
-            const visit = await response.json();
-
-            UpdateTablevisit(visit);
-
+            const attend = await response.json();
+            UpdateTableAttend(attend);
             return true;
         } else {
             const error = await response.json();
@@ -98,17 +96,14 @@ async function Updatevisit(visit) {
     }
 }
 
-
-async function Addvisit(visit) {
+async function AddAttend(attend) {
     try {
-        const visitString = JSON.stringify(visit);
-        const response = await fetch(`/api/visits/${visitString}`, { method: "POST" });
+        const attendeestring = encodeURIComponent(JSON.stringify(attend));
+        const response = await fetch(`http://194.87.92.189:5000/api/attendees/${attendeestring}`, { method: "POST" });
 
         if (response.ok === true) {
-            const visit = await response.json();
-
-            AddvisitToTable(visit);
-
+            const attend = await response.json();
+            AddAttendToTable(attend);
             return true;
         } else {
             const error = await response.json();
@@ -121,33 +116,24 @@ async function Addvisit(visit) {
     }
 }
 
-
-function UpdateTablevisit(visit) {
-    visit.activityID = document.getElementById("activityID").value;
-    visit.userID = document.getElementById("userID").value;
-
-
-    let row = document.getElementById(`rowvisit${visit.id}`);
+function UpdateTableAttend(attend) {
+    let row = document.getElementById(`rowattend${attend.id}`);
     row.innerHTML = `
-                <td>${visit.id}</td>
-                <td>${visit.activityID}</td>
-                <td>${visit.userID}</td>
+                <td>${attend.id}</td>
+                <td>${attend.trainingId}</td>
+                <td>${attend.userId}</td>
                 <td> 
-                    <button class="btn btn-warning m-2" onclick="Selectvisit(${visit})">Change</button> 
-                    <button class="btn btn-danger m-2" onclick="Deletevisit(${visit})">Delete</button> 
+                    <button class="btn btn-warning m-2" onclick='SelectAttend(${(JSON.stringify(attend))})'>Change</button> 
+                    <button class="btn btn-danger m-2" onclick='DeleteAttend(${attend.id})'>Delete</button> 
                 </td>`
 }
 
-
-async function Deletevisit(visit) {
+async function DeleteAttend(attendid) {
     try {
-        const response = await fetch(`/api/visits/${visit.id}`, { method: "DELETE" });
+        const response = await fetch(`http://194.87.92.189:5000/api/attendees/${attendid}`, { method: "DELETE" });
 
         if (response.ok === true) {
-            const visit = await response.json();
-
-            DeleteTablevisit(visit);
-
+            DeleteTableattend(attendid);
             return true;
         } else {
             const error = await response.json();
@@ -160,9 +146,7 @@ async function Deletevisit(visit) {
     }
 }
 
-
-function DeleteTablevisit(visit) {
-    visits.splice(visits.indexOf(visit), 1);
-
-    document.getElementById(`rowvisit${visit.id}`).remove();
+function DeleteTableattend(attendid) {
+    attendees.splice(attendees.indexOf(attend => attend.id === attendid), 1);
+    document.getElementById(`rowattend${attendid}`).remove();
 }

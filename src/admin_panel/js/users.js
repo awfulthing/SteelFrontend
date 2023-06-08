@@ -1,51 +1,103 @@
-/* = getUsers() */;
+let users = [];
 
-//Пустышки
-var users = [
-    {
-        id: 1,
-        roleId: 1,
-        surname: "Шинакрук",
-        name: "София",
-        middleName: "Олеговна",
-        email: "shinkaruks@meer.ci.nsu.ru",
-        phone: +79046478828,
-        password: "123",
-        gender: "Женский",
-        dateOfBirtd: "2003-11-21",
-        photo: "",
-        vkontakte: "",
-        telegram: "",
-        city: "Новосибирск"
-    },
-    {
-        id: 2,
-        roleId: 1,
-        surname: "Тябин",
-        name: "Иван",
-        middleName: "Алексеевич",
-        email: "vanya@mail.ru",
-        phone: 89134749515,
-        password: "123",
-        gender: "Мужской",
-        dateOfBirtd: "2003-11-08",
-        photo: "",
-        vkontakte: "",
-        telegram: "",
-        city: "Новосибирск"
+async function fetchData() {
+    try {
+        users = await GetUsers();
+        users.forEach(user => AddUserToTable(user));
+    } catch (error) {
+        console.log(error);
     }
-]
+}
+
+fetchData();
+
+
 
 //Добавить по кнопке
 document.getElementById("submit").addEventListener("click", () => {
-    AddUser();
+    const dateOfBirthValue = document.getElementById("dateOfBirth").value || '0001-01-01T';
+
+    // Преобразуем значение в нужный формат yyyy-MM-dd
+    const dateParts = dateOfBirthValue.split("T")[0].split("-");
+    const year = dateParts[0];
+    const month = dateParts[1];
+    const day = dateParts[2];
+    const formattedDate = `${year}-${month}-${day}`;
+    var user = {
+        roleId: document.getElementById("role_id").value || 1,
+        surname: document.getElementById("surname").value || 'default',
+        name: document.getElementById("name").value || 'default',
+        middleName: document.getElementById("middleName").value || 'default',
+        email: document.getElementById("email").value || 'default',
+        phone: document.getElementById("phone").value || '70000000000',
+        password: document.getElementById("password").value || 'default',
+        gender: document.getElementById("gender").value || 'Мужской',
+        dateOfBirth: formattedDate,
+        photo: document.getElementById("photo").value || 'default',
+        vkontakte: document.getElementById("vk").value || 'default',
+        telegram: document.getElementById("telegram").value || 'default',
+        city: document.getElementById("city").value || 'default'
+    };
+
+    AddUser(user);
     ClearForms();
-})
+});
 
-//Добавление пользователей из базы в таблицу
-users.forEach(user => AddUserToTable(user));
 
-//Добавление пользователей в табилцу
+function SelectUser(user) {
+    const dateOfBirthValue = user.dateOfBirth || '0001-01-01T00:00:00';
+    const formattedDate = dateOfBirthValue.split('T')[0];
+
+    document.getElementById("ID").value = user.id;
+    document.getElementById("role_id").value = user.roleId;
+    document.getElementById("surname").value = user.surname;
+    document.getElementById("name").value = user.name;
+    document.getElementById("middleName").value = user.middleName;
+    document.getElementById("email").value = user.email;
+    document.getElementById("phone").value = user.phone;
+    document.getElementById("password").value = user.password;
+    document.getElementById("gender").value = user.gender;
+    document.getElementById("dateOfBirth").value = formattedDate;
+    document.getElementById("photo").value = user.photo;
+    document.getElementById("vk").value = user.vkontakte;
+    document.getElementById("telegram").value = user.telegram;
+    document.getElementById("city").value = user.city;
+}
+
+//Обновить по кнопке
+document.getElementById("update").addEventListener("click", () => {
+    const dateOfBirthValue = document.getElementById("dateOfBirth").value || '01-01-0001T00:00:00';
+    console.log(dateOfBirthValue)
+
+    // Преобразуем значение в нужный формат yyyy-MM-dd
+    const dateParts = dateOfBirthValue.split("T")[0].split("-");
+    const year = dateParts[0];
+    const month = dateParts[1];
+    const day = dateParts[2];
+    const formattedDate = `${year}-${month}-${day}T01:01:01`;
+    const user =
+    {
+        id: document.getElementById("ID").value,
+        roleId: document.getElementById("role_id").value,
+        surname: document.getElementById("surname").value,
+        name: document.getElementById("name").value,
+        middleName: document.getElementById("middleName").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        password: document.getElementById("password").value,
+        gender: document.getElementById("gender").value,
+        dateOfBirth: formattedDate,
+        photo: document.getElementById("photo").value,
+        vkontakte: document.getElementById("vk").value,
+        telegram: document.getElementById("telegram").value,
+        city: document.getElementById("city").value
+    }
+    console.log(user)
+    if (UpdateUser(user)) {
+        ClearForms();
+    }
+});
+
 function AddUserToTable(user) {
     if (!users.some(u => u.id === user.id)) users.push(user);
 
@@ -60,42 +112,18 @@ function AddUserToTable(user) {
         <td>${user.phone}</td>
         <td>${user.password}</td>
         <td>${user.gender}</td>
-        <td>${user.dateOfBirtd}</td>
+        <td>${user.dateOfBirth}</td>
         <td>${user.photo}</td>
         <td>${user.vkontakte}</td>
         <td>${user.telegram}</td>
         <td>${user.city}</td>
         <td> 
-            <button class="btn btn-warning m-2" onclick="SelectUser(${user})">Change</button> 
-            <button class="btn btn-danger m-2" onclick="DeleteUser(${user})">Delete</button> 
+            <button class="btn btn-warning m-2" onclick='SelectUser(${(JSON.stringify(user))})'>Change</button> 
+            <button class="btn btn-danger m-2" onclick='DeleteUser(${user.id})'>Delete</button> 
         </td>
     </tr>`;
 }
 
-//Отобразить по кнопке "Change"
-function SelectUser(user) {
-    document.getElementById("ID").value = user.id;
-    document.getElementById("role_id").value = user.roleId;
-    document.getElementById("surname").value = user.surname;
-    document.getElementById("name").value = user.name;
-    document.getElementById("patronymic").value = user.middleName;
-    document.getElementById("email").value = user.email;
-    document.getElementById("phone").value = user.phone;
-    document.getElementById("password").value = user.password;
-    document.getElementById("gender").value = user.gender;
-    document.getElementById("dateOfBirtd").value = user.dateOfBirtd;
-    document.getElementById("photo").value = user.photo;
-    document.getElementById("vk").value = user.vkontakte;
-    document.getElementById("telegram").value = user.telegram;
-    document.getElementById("city").value = user.city;
-}
-
-//Обновить по кнопке
-document.getElementById("update").addEventListener("click", () => {
-    if (UpdateUser(users[document.getElementById("ID").value])) {
-        ClearForms();
-    }
-});
 
 //Обнулить формы
 function ClearForms() {
@@ -103,12 +131,12 @@ function ClearForms() {
     document.getElementById("role_id").value = 1;
     document.getElementById("surname").value = "";
     document.getElementById("name").value = "";
-    document.getElementById("patronymic").value = "";
+    document.getElementById("middleName").value = "";
     document.getElementById("email").value = "";
     document.getElementById("phone").value = "";
     document.getElementById("password").value = "";
     document.getElementById("gender").value = "Мужской";
-    document.getElementById("dateOfBirtd").value = "";
+    document.getElementById("dateOfBirth").value = "";
     document.getElementById("photo").value = "";
     document.getElementById("vk").value = "";
     document.getElementById("telegram").value = "";
@@ -118,7 +146,7 @@ function ClearForms() {
 //Получить пользователей из бд
 async function GetUsers() {
     try {
-        const response = await fetch(`https://localhost:7286/api/users`);
+        const response = await fetch(`http://194.87.92.189:5000/api/users`);
 
         if (response.ok === true) {
             return await response.json();
@@ -134,14 +162,12 @@ async function GetUsers() {
 //Обновить пользователя в БД и в таблицу
 async function UpdateUser(user) {
     try {
-        const userString = JSON.stringify(user);
-        const response = await fetch(`/api/users/${userString}`, { method: "PUT" });
+        const userString = encodeURIComponent(JSON.stringify(user));
+        const response = await fetch(`http://194.87.92.189:5000/api/users/${userString}`, { method: "PUT" });
 
         if (response.ok === true) {
             const user = await response.json();
-
             UpdateTableUser(user);
-
             return true;
         } else {
             const error = await response.json();
@@ -157,8 +183,8 @@ async function UpdateUser(user) {
 //Добавить пользователя в БД и в таблицу
 async function AddUser(user) {
     try {
-        const userString = JSON.stringify(user);
-        const response = await fetch(`/api/users/${userString}`, { method: "POST" });
+        const userString = encodeURIComponent(JSON.stringify(user));
+        const response = await fetch(`http://194.87.92.189:5000/api/users/${userString}`, { method: "POST" });
 
         if (response.ok === true) {
             const user = await response.json();
@@ -179,19 +205,6 @@ async function AddUser(user) {
 
 //Обновить данные пользователя в таблице
 function UpdateTableUser(user) {
-    user.roleId = document.getElementById("role_id").value;
-    user.surname = document.getElementById("surname").value;
-    user.name = document.getElementById("name").value;
-    user.middleName = document.getElementById("patronymic").value;
-    user.email = document.getElementById("email").value;
-    user.phone = document.getElementById("phone").value;
-    user.password = document.getElementById("password").value;
-    user.gender = document.getElementById("gender").value;
-    user.dateOfBirtd = document.getElementById("dateOfBirtd").value;
-    user.photo = document.getElementById("photo").value;
-    user.vkontakte = document.getElementById("vk").value;
-    user.telegram = document.getElementById("telegram").value;
-    user.city = document.getElementById("city").value;
 
     let row = document.getElementById(`rowUser${user.id}`);
     row.innerHTML = `
@@ -204,26 +217,24 @@ function UpdateTableUser(user) {
                 <td>${user.phone}</td>
                 <td>${user.password}</td>
                 <td>${user.gender}</td>
-                <td>${user.dateOfBirtd}</td>
+                <td>${user.dateOfBirth}</td>
                 <td>${user.photo}</td>
                 <td>${user.vkontakte}</td>
                 <td>${user.telegram}</td>
                 <td>${user.city}</td>
                 <td> 
-                    <button class="btn btn-warning m-2" onclick="SelectUser(${user})">Change</button> 
-                    <button class="btn btn-danger m-2" onclick="DeleteUser(${user})">Delete</button> 
+                    <button class="btn btn-warning m-2" onclick='SelectUser(${(JSON.stringify(user))})'>Change</button> 
+                    <button class="btn btn-danger m-2" onclick='DeleteUser(${user.id})'>Delete</button> 
                 </td>`
 }
 
 //Удалить пользователя из БД
-async function DeleteUser(user) {
+async function DeleteUser(userid) {
     try {
-        const response = await fetch(`/api/users/${user.id}`, { method: "DELETE" });
+        const response = await fetch(`http://194.87.92.189:5000/api/users/${userid}`, { method: "DELETE" });
 
         if (response.ok === true) {
-            const user = await response.json();
-
-            DeleteTableUser(user);
+            DeleteTableUser(userid);
 
             return true;
         } else {
@@ -238,8 +249,7 @@ async function DeleteUser(user) {
 }
 
 //Удалить пользователя из таблицы
-function DeleteTableUser(user) {
-    users.splice(users.indexOf(user), 1);
-
-    document.getElementById(`rowUser${user.id}`).remove();
+function DeleteTableUser(userid) {
+    users.splice(users.indexOf(user => user.id === userid), 1);
+    document.getElementById(`rowUser${userid}`).remove();
 }

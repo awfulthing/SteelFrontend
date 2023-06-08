@@ -1,90 +1,10 @@
-/*= GetTeachers()*/
-var teachers = [
-    {
-        id: 1,
-        user: {
-            id: 1,
-            roleId: 1,
-            surname: "Шинакрук",
-            name: "София",
-            middleName: "Олеговна",
-            email: "shinkaruks@mer.ci.nsu.ru",
-            phone: "+79046478828",
-            password: "123",
-            gender: "Женский",
-            dateOfBirtd: "2003-11-21",
-            photo: "img/triner_ulia.png",
-            vkontakte: "awfultthing",
-            telegram: "awfultthing",
-            city: "Новосибирск"
-        },
-        experience: "2 года",
-        description: "бубубуб",
-        activities: [
-            {
-                id: 1,
-                nameOfactivity: "Йога",
-                description: "бубубу",
-                photo: "img/yoga.png",
-                icon: "icons/yoga.svg",
-                duration: 60,
-            },
-            {
-                id: 2,
-                nameOfactivity: "Растяжка",
-                description: "бубубу",
-                photo: "img/stretching.png",
-                icon: "icons/stretching.svg",
-                duration: 60,
-            }
-        ]
-
-    },
-    {
-        id: 2,
-        user: {
-            id: 2,
-            roleId: 2,
-            surname: "Тябин",
-            name: "Иван",
-            middleName: "Олеговна",
-            email: "shinkaruks@meer.ci.nsu.ru",
-            phone: +79046478828,
-            password: "123",
-            gender: "Женский",
-            dateOfBirtd: "2003-11-21",
-            photo: "img/trainer_denis.png",
-            vkontakte: "awfultthing",
-            telegram: "awfultthing",
-            city: "Новосибирск"
-        },
-        experience: "2 года",
-        description: "бубубуб",
-        activities: [
-            {
-                id: 1,
-                nameOfactivity: "Йога",
-                description: "бубубу",
-                photo: "img/yoga.png",
-                icon: "icons/yoga.svg",
-                duration: 60,
-            }
-        ]
-    }
-]
-
+let teachers = [];
 var data = localStorage.getItem("data");
 var activity = JSON.parse(data);
-
-document.getElementById("activity_page_title").innerText = activity.nameOfactivity;
-document.getElementById("training_name").innerText = activity.nameOfactivity;
-document.getElementById("training_descr").innerText = activity.description;
-document.getElementById("banner").setAttribute("src", activity.photo);
-document.getElementById("training_name").innerText = activity.nameOfactivity;
-
-teachers.forEach(teacher => AddteacherToPage(teacher));
+AwaitData();
 
 function AddteacherToPage(teacher) {
+    console.log(teacher)
     if (!teachers.some(teach => teach.id === teacher.id)) teachers.push(teacher);
     document.getElementById("trainer_on_activity_page").innerHTML += `
         <div class="col-6 col-md-4 col-lg-3">
@@ -109,10 +29,10 @@ function ChangeToteacherPage(teacherId) {
 
 async function GetTeachers() {
     try {
-        const response = await fetch(`/api/teachers/activity/${activity.id}`);
+        const response = await fetch(`http://194.87.92.189:5000/api/teachers/extended/activity/${activity.id}`);
 
         if (response.ok === true) {
-            return await response.json();
+            teachers = await response.json();
         } else {
             const error = await response.json();
             console.log(error.message);
@@ -122,3 +42,14 @@ async function GetTeachers() {
     }
 }
 
+async function AwaitData() {
+    await GetTeachers();
+
+    teachers.forEach(teacher => AddteacherToPage(teacher));
+
+    document.getElementById("activity_page_title").innerText = activity.name;
+    document.getElementById("training_name").innerText = activity.name;
+    document.getElementById("training_descr").innerText = activity.description;
+    document.getElementById("banner").setAttribute("src", activity.photo);
+    document.getElementById("training_name").innerText = activity.name;
+}

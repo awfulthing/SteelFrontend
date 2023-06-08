@@ -1,68 +1,70 @@
-/* = getwhosAchiewments() */;
+let usersAchievements = [];
 
-var whosAchiewments = [
-    {
-        id: 1,
-        userID: 1,
-        achievmentID: 1,
-    },
-    {
-        id: 2,
-        userID: 2,
-        achievmentID: 2,
+async function fetchData() {
+    try {
+        usersAchievements = await GetUsersAchievements();
+        usersAchievements.forEach(userAchievement => AddUserAchievementToTable(userAchievement));
+    } catch (error) {
+        console.log(error);
     }
-]
+}
 
+fetchData();
 
 document.getElementById("submit").addEventListener("click", () => {
-    AddwhosAchiewment();
+    var userAchievement =
+    {
+        userId: document.getElementById("userId").value,
+        achievementId: document.getElementById("achievementId").value,
+    }
+    AddUserAchievement(userAchievement);
     ClearForms();
 })
 
-
-whosAchiewments.forEach(whosAchiewment => AddwhosAchiewmentToTable(whosAchiewment));
-
-
-function AddwhosAchiewmentToTable(whosAchiewment) {
-    if (!whosAchiewments.some(who => who.id === whosAchiewment.id)) whosAchiewments.push(whosAchiewment);
-
-    document.getElementById("tableContext").innerHTML += `
-    <tr id="rowwhosAchiewment${whosAchiewment.id}">
-        <td>${whosAchiewment.id}</td>
-        <td>${whosAchiewment.userID}</td>
-        <td>${whosAchiewment.achievmentID}</td>
-        <td> 
-            <button class="btn btn-warning m-2" onclick="SelectwhosAchiewment(${whosAchiewment})">Change</button> 
-            <button class="btn btn-danger m-2" onclick="DeletewhosAchiewment(${whosAchiewment})">Delete</button> 
-        </td>
-    </tr>`;
-}
-
-
-function SelectwhosAchiewment(whosAchiewment) {
-    document.getElementById("ID").value = whosAchiewment.id;
-    document.getElementById("userID").value = whosAchiewment.userID;
-    document.getElementById("achievmentID").value = whosAchiewment.achievmentID;
+function SelectUserAchievement(userAchievement) {
+    document.getElementById("id").value = userAchievement.id;
+    document.getElementById("userId").value = userAchievement.userId;
+    document.getElementById("achievementId").value = userAchievement.achievementId;
 }
 
 
 document.getElementById("update").addEventListener("click", () => {
-    if (UpdatewhosAchiewment(whosAchiewments[document.getElementById("ID").value])) {
+    const userAchievement =
+    {
+        id: document.getElementById("id").value,
+        userId: document.getElementById("userId").value,
+        achievementId: document.getElementById("achievementId").value,
+    }
+    if (UpdateUserAchievement(userAchievement)) {
         ClearForms();
     }
 });
 
+function AddUserAchievementToTable(userAchievement) {
+    if (!usersAchievements.some(who => who.id === userAchievement.id)) usersAchievements.push(userAchievement);
+
+    document.getElementById("tableContext").innerHTML += `
+    <tr id="rowuserAchievement${userAchievement.id}">
+        <td>${userAchievement.id}</td>
+        <td>${userAchievement.userId}</td>
+        <td>${userAchievement.achievementId}</td>
+        <td> 
+            <button class="btn btn-warning m-2" onclick='SelectUserAchievement(${(JSON.stringify(userAchievement))})'>Change</button> 
+            <button class="btn btn-danger m-2" onclick='DeleteUserAchievement(${userAchievement.id})'>Delete</button> 
+        </td>
+    </tr>`;
+}
 
 function ClearForms() {
-    document.getElementById("ID").value = 0;
-    document.getElementById("userID").value = "";
-    document.getElementById("achievmentID").value = 1;
+    document.getElementById("id").value = 0;
+    document.getElementById("userId").value = "";
+    document.getElementById("achievementId").value = 1;
 }
 
 
-async function GetwhosAchiewments() {
+async function GetUsersAchievements() {
     try {
-        const response = await fetch(`https://localhost:7286/api/whosAchiewments`);
+        const response = await fetch(`http://194.87.92.189:5000/api/usersAchievements`);
 
         if (response.ok === true) {
             return await response.json();
@@ -75,17 +77,14 @@ async function GetwhosAchiewments() {
     }
 }
 
-
-async function UpdatewhosAchiewment(whosAchiewment) {
+async function UpdateUserAchievement(userAchievement) {
     try {
-        const whosAchiewmentString = JSON.stringify(whosAchiewment);
-        const response = await fetch(`/api/whosAchiewments/${whosAchiewmentString}`, { method: "PUT" });
+        const userAchievementString = JSON.stringify(userAchievement);
+        const response = await fetch(`http://194.87.92.189:5000/api/usersAchievements/${userAchievementString}`, { method: "PUT" });
 
         if (response.ok === true) {
-            const whosAchiewment = await response.json();
-
-            UpdateTablewhosAchiewment(whosAchiewment);
-
+            const userAchievement = await response.json();
+            UpdateTableUserAchievement(userAchievement);
             return true;
         } else {
             const error = await response.json();
@@ -98,17 +97,14 @@ async function UpdatewhosAchiewment(whosAchiewment) {
     }
 }
 
-
-async function AddwhosAchiewment(whosAchiewment) {
+async function AddUserAchievement(userAchievement) {
     try {
-        const whosAchiewmentString = JSON.stringify(whosAchiewment);
-        const response = await fetch(`/api/whosAchiewments/${whosAchiewmentString}`, { method: "POST" });
+        const userAchievementString = encodeURIComponent(JSON.stringify(userAchievement));
+        const response = await fetch(`http://194.87.92.189:5000/api/usersAchievements/${userAchievementString}`, { method: "POST" });
 
         if (response.ok === true) {
-            const whosAchiewment = await response.json();
-
-            AddwhosAchiewmentToTable(whosAchiewment);
-
+            const userAchievement = await response.json();
+            AddUserAchievementToTable(userAchievement);
             return true;
         } else {
             const error = await response.json();
@@ -121,33 +117,25 @@ async function AddwhosAchiewment(whosAchiewment) {
     }
 }
 
-
-function UpdateTablewhosAchiewment(whosAchiewment) {
-    whosAchiewment.userID = document.getElementById("userID").value;
-    whosAchiewment.achievmentID = document.getElementById("achievmentID").value;
-
-
-    let row = document.getElementById(`rowwhosAchiewment${whosAchiewment.id}`);
+function UpdateTableUserAchievement(userAchievement) {
+    let row = document.getElementById(`rowuserAchievement${userAchievement.id}`);
     row.innerHTML = `
-                <td>${whosAchiewment.id}</td>
-                <td>${whosAchiewment.userID}</td>
-                <td>${whosAchiewment.achievmentID}</td>
+                <td>${userAchievement.id}</td>
+                <td>${userAchievement.userId}</td>
+                <td>${userAchievement.achievementId}</td>
                 <td> 
-                    <button class="btn btn-warning m-2" onclick="SelectwhosAchiewment(${whosAchiewment})">Change</button> 
-                    <button class="btn btn-danger m-2" onclick="DeletewhosAchiewment(${whosAchiewment})">Delete</button> 
+                    <button class="btn btn-warning m-2" onclick='SelectUserAchievement(${(JSON.stringify(userAchievement))})'>Change</button> 
+                    <button class="btn btn-danger m-2" onclick='DeleteUserAchievement(${userAchievement.id})'>Delete</button> 
                 </td>`
 }
 
 
-async function DeletewhosAchiewment(whosAchiewment) {
+async function DeleteUserAchievement(userAchievementid) {
     try {
-        const response = await fetch(`/api/whosAchiewments/${whosAchiewment.id}`, { method: "DELETE" });
+        const response = await fetch(`http://194.87.92.189:5000/api/usersAchievements/${userAchievementid}`, { method: "DELETE" });
 
         if (response.ok === true) {
-            const whosAchiewment = await response.json();
-
-            DeleteTablewhosAchiewment(whosAchiewment);
-
+            DeleteTableUserAchievement(userAchievementid);
             return true;
         } else {
             const error = await response.json();
@@ -160,9 +148,7 @@ async function DeletewhosAchiewment(whosAchiewment) {
     }
 }
 
-
-function DeleteTablewhosAchiewment(whosAchiewment) {
-    whosAchiewments.splice(whosAchiewments.indexOf(whosAchiewment), 1);
-
-    document.getElementById(`rowwhosAchiewment${whosAchiewment.id}`).remove();
+function DeleteTableUserAchievement(userAchievementid) {
+    usersAchievements.splice(usersAchievements.indexOf(userAchievement => userAchievement.id === userAchievementid), 1);
+    document.getElementById(`rowuserAchievement${userAchievementid}`).remove();
 }
